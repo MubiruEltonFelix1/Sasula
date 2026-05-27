@@ -1,0 +1,53 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="40" x2="1110" y2="590" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B0D0F"/>
+      <stop offset="0.5" stop-color="#141618"/>
+      <stop offset="1" stop-color="#10161D"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="180" y1="160" x2="1020" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0A830"/>
+      <stop offset="1" stop-color="#D4891A"/>
+    </linearGradient>
+    <filter id="blur" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="55"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="150" cy="140" r="125" fill="#1A6B8A" opacity="0.28" filter="url(#blur)"/>
+  <circle cx="1050" cy="510" r="160" fill="#D4891A" opacity="0.22" filter="url(#blur)"/>
+  <circle cx="930" cy="130" r="110" fill="#2A8055" opacity="0.2" filter="url(#blur)"/>
+
+  <rect x="76" y="66" width="1048" height="498" rx="42" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+
+  <text x="120" y="155" fill="#F0A830" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="4">SASULA</text>
+  <text x="120" y="245" fill="#FFFFFF" font-family="Cormorant Garamond, Georgia, serif" font-size="82" font-weight="700">Cashless. Instant. Intelligent.</text>
+
+  <text x="120" y="310" fill="rgba(255,255,255,0.82)" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="28" font-weight="500">
+    Request payments, share a secure code or link, and receive money with full payment context.
+  </text>
+  <text x="120" y="352" fill="rgba(255,255,255,0.72)" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="26" font-weight="400">
+    Built for merchants, freelancers, and teams who want a simple, mobile-first payment journey.
+  </text>
+
+  <g transform="translate(120 412)">
+    <rect x="0" y="0" width="220" height="58" rx="29" fill="url(#gold)"/>
+    <text x="110" y="37" text-anchor="middle" fill="#0B0D0F" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="20" font-weight="800">Request</text>
+    <rect x="240" y="0" width="220" height="58" rx="29" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+    <text x="350" y="37" text-anchor="middle" fill="#FFFFFF" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="20" font-weight="700">Receive</text>
+    <rect x="480" y="0" width="246" height="58" rx="29" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+    <text x="603" y="37" text-anchor="middle" fill="#FFFFFF" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="20" font-weight="700">WhatsApp ready</text>
+  </g>
+
+  <g transform="translate(860 145)">
+    <rect x="0" y="0" width="200" height="270" rx="34" fill="#11151A" stroke="rgba(255,255,255,0.12)"/>
+    <rect x="18" y="18" width="164" height="30" rx="15" fill="rgba(255,255,255,0.05)"/>
+    <rect x="18" y="66" width="164" height="82" rx="18" fill="rgba(212,137,26,0.15)" stroke="rgba(212,137,26,0.35)"/>
+    <rect x="18" y="166" width="164" height="30" rx="15" fill="rgba(255,255,255,0.05)"/>
+    <rect x="18" y="206" width="110" height="30" rx="15" fill="rgba(255,255,255,0.05)"/>
+    <circle cx="100" cy="107" r="24" stroke="#F0A830" stroke-width="6"/>
+    <path d="M100 93v15l10 6" stroke="#F0A830" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="120" y="496" fill="rgba(255,255,255,0.55)" font-family="DM Mono, monospace" font-size="18">sasula.ug</text>
+</svg>
