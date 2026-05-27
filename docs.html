@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sasula Docs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4891A;
+            --gold-light: #F0A830;
+            --gold-pale: rgba(212, 137, 26, 0.12);
+            --ember: #C1440E;
+            --forest-light: #2A8055;
+            --sky-light: #2490B8;
+            --ink: #0B0D0F;
+            --ink-2: #141618;
+            --ink-3: #1C1F22;
+            --text-dim: rgba(255, 255, 255, 0.45);
+            --text-mid: rgba(255, 255, 255, 0.7);
+            --text-bright: rgba(255, 255, 255, 0.92);
+            --border-dark: rgba(255, 255, 255, 0.07);
+            --border-gold: rgba(212, 137, 26, 0.25);
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(212, 137, 26, 0.11), transparent 35%),
+                radial-gradient(circle at top right, rgba(36, 144, 184, 0.12), transparent 28%),
+                var(--ink);
+            color: var(--text-bright);
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; }
+        .wrap { max-width: 1160px; margin: 0 auto; padding: 0 5vw; }
+        .nav {
+            position: sticky; top: 0; z-index: 20;
+            display: flex; align-items: center; justify-content: space-between;
+            min-height: 72px; padding: 0 5vw;
+            background: rgba(11,13,15,0.86); backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+        .brand-mark { width:40px; height:40px; border-radius: 12px; background: linear-gradient(135deg, var(--gold), var(--ember)); display:grid; place-items:center; box-shadow: 0 20px 40px rgba(212,137,26,0.25); }
+        .brand-mark svg, .icon svg { width: 18px; height: 18px; }
+        .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; }
+        .brand-name span { color: var(--gold); }
+        .nav-links { display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
+        .nav-links a { text-decoration:none; color: var(--text-mid); font-size: 14px; }
+        .nav-links a:hover { color: var(--gold-light); }
+        .btn {
+            display:inline-flex; align-items:center; gap:10px; justify-content:center;
+            padding: 13px 18px; border-radius: 12px; text-decoration:none; border: 1px solid var(--border-dark);
+            background: rgba(255,255,255,0.04); color: var(--text-bright); font-weight: 700; font-size: 14px;
+        }
+        .btn.primary { background: linear-gradient(135deg, var(--gold), var(--ember)); border-color: transparent; }
+        .btn.secondary { background: transparent; }
+        .hero { padding: 88px 0 36px; }
+        .eyebrow { color: var(--gold-light); text-transform: uppercase; letter-spacing: 2.5px; font-size: 11px; font-weight: 700; margin-bottom: 14px; }
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
+        h1 { font-size: clamp(42px, 7vw, 72px); line-height: 0.95; max-width: 10ch; margin-bottom: 18px; }
+        .lede { max-width: 760px; color: var(--text-dim); font-size: 18px; line-height: 1.8; margin-bottom: 28px; }
+        .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
+        .panel-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 44px 0; }
+        .panel {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-dark);
+            border-radius: 24px; padding: 26px; box-shadow: 0 16px 44px rgba(0,0,0,0.22);
+        }
+        .panel h2 { font-size: 34px; margin-bottom: 12px; }
+        .panel p { color: var(--text-dim); line-height: 1.75; margin: 0 0 18px; }
+        .steps { display:grid; gap:12px; }
+        .step {
+            display:flex; gap:12px; align-items:flex-start; padding: 15px 16px; border-radius: 16px;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+        }
+        .step-badge {
+            width: 32px; height: 32px; border-radius: 50%; flex: 0 0 auto;
+            display:grid; place-items:center; background: var(--gold-pale); color: var(--gold-light);
+        }
+        .step strong { display:block; margin-bottom: 2px; }
+        .step span { display:block; color: var(--text-dim); font-size: 12px; line-height: 1.55; }
+        .section { padding: 48px 0; }
+        .section-title { font-size: clamp(30px, 4vw, 52px); line-height: 1.05; margin-bottom: 14px; }
+        .section-sub { max-width: 760px; color: var(--text-dim); font-size: 16px; line-height: 1.8; margin-bottom: 26px; }
+        .cards { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid var(--border-dark); border-radius: 22px; padding: 22px; }
+        .card h3 { font-size: 24px; margin-bottom: 10px; }
+        .card p, .card li { color: var(--text-dim); line-height: 1.7; }
+        .list { padding-left: 18px; margin: 0; }
+        .link-grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+        .doc-link {
+            display:flex; align-items:center; justify-content:space-between; gap:12px; text-decoration:none;
+            padding: 16px 18px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+        }
+        .doc-link strong { display:block; margin-bottom:2px; }
+        .doc-link span { display:block; color: var(--text-dim); font-size: 12px; line-height: 1.55; }
+        .mini-icon {
+            width: 38px; height: 38px; border-radius: 13px; flex: 0 0 auto;
+            display:grid; place-items:center; background: rgba(212,137,26,0.12); color: var(--gold-light);
+        }
+        .mini-icon.sky { background: rgba(36,144,184,0.12); color: var(--sky-light); }
+        .mini-icon.green { background: rgba(42,128,85,0.12); color: var(--forest-light); }
+        .mini-icon svg { width: 18px; height: 18px; }
+        .footer { padding: 56px 0 32px; border-top: 1px solid var(--border-dark); margin-top: 64px; }
+        .footer-row { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:center; }
+        .muted { color: var(--text-dim); font-size: 12px; }
+        .subtle { color: var(--text-mid); }
+
+        @media (max-width: 900px) {
+            .nav { padding: 0 4vw; }
+            .panel-grid, .cards, .link-grid { grid-template-columns: 1fr; }
+            .hero { padding-top: 64px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="nav">
+        <a class="brand" href="index.html">
+            <div class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 14c2.5-6 4.5-8 7-8s4.5 2 7 8"></path>
+                    <path d="M7 11c1.6-2.5 2.8-3.8 5-3.8s3.4 1.3 5 3.8"></path>
+                    <path d="M15.5 10.5l3 0.5-0.5 3"></path>
+                </svg>
+            </div>
+            <div class="brand-name">Sa<span>sula</span></div>
+        </a>
+        <nav class="nav-links" aria-label="Docs navigation">
+            <a href="#overview">Overview</a>
+            <a href="#getting-started">Getting started</a>
+            <a href="#request-flow">Request flow</a>
+            <a href="#receive-flow">Receive flow</a>
+            <a href="#reference">Reference</a>
+        </nav>
+    </header>
+
+    <main class="wrap">
+        <section class="hero" id="overview">
+            <div class="eyebrow">Documentation</div>
+            <h1>Simple guidance for the Sasula payment flow.</h1>
+            <p class="lede">This page explains the simulated request and receive journeys in plain language. It is written for people who want to understand the product quickly, without reading the full landing page.</p>
+            <div class="hero-actions">
+                <a class="btn primary" href="index.html#journey">Open the journey on the homepage</a>
+                <a class="btn secondary" href="index.html">Back to homepage</a>
+            </div>
+        </section>
+
+        <section class="panel-grid" id="getting-started">
+            <article class="panel">
+                <h2>Getting started</h2>
+                <p>Use these first steps if you are trying Sasula for the first time.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-badge">1</div>
+                        <div><strong>Open the request flow</strong><span>Enter an amount, a reason, and a name or business label.</span></div>
+                    </div>
+                    <div class="step">
+                        <div class="step-badge">2</div>
+                        <div><strong>Share the request</strong><span>Send the code through WhatsApp, SMS, or another simple share path.</span></div>
+                    </div>
+                    <div class="step">
+                        <div class="step-badge">3</div>
+                        <div><strong>Confirm payment</strong><span>The receive view records the simulated payment and updates the receipt.</span></div>
+                    </div>
+                </div>
+            </article>
+            <article class="panel">
+                <h2>What this page covers</h2>
+                <p>The docs are intentionally short and practical.</p>
+                <ul class="list">
+                    <li>How to create a payment request</li>
+                    <li>How to receive and review incoming payments</li>
+                    <li>How the request code, link, and QR simulations behave</li>
+                    <li>Where to find the homepage journey and demo sections</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section" id="request-flow">
+            <div class="section-title">Request flow</div>
+            <p class="section-sub">The request flow is the merchant-side simulation. It creates a payment context before anything is paid.</p>
+            <div class="cards">
+                <article class="card">
+                    <h3>1. Enter the request</h3>
+                    <p>Provide the amount, a reason, and the payer or business name. The flow uses that data to build a readable request.</p>
+                </article>
+                <article class="card">
+                    <h3>2. Set the rules</h3>
+                    <p>Choose an expiry and optional settings such as partial payment. These settings shape the simulated request summary.</p>
+                </article>
+                <article class="card">
+                    <h3>3. Share the result</h3>
+                    <p>The request generates a shareable code. Users can copy it, send it by message, or show it on screen.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="receive-flow">
+            <div class="section-title">Receive flow</div>
+            <p class="section-sub">The receive flow shows what happens after a request is created. It groups the wallet, methods, and payment history together.</p>
+            <div class="link-grid">
+                <a class="doc-link" href="index.html#receive">
+                    <div>
+                        <strong>Wallet view</strong>
+                        <span>Balance, pending items, and settled payments.</span>
+                    </div>
+                    <div class="mini-icon sky" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="6" width="16" height="12" rx="3"></rect>
+                            <path d="M7 10h10"></path>
+                            <path d="M7 14h5"></path>
+                        </svg>
+                    </div>
+                </a>
+                <a class="doc-link" href="index.html#receive">
+                    <div>
+                        <strong>Receive methods</strong>
+                        <span>Payment code, link, QR, and bank details in one place.</span>
+                    </div>
+                    <div class="mini-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 7h10v10H7z"></path>
+                            <path d="M4 12h3"></path>
+                            <path d="M17 12h3"></path>
+                            <path d="M12 4v3"></path>
+                            <path d="M12 17v3"></path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="section" id="reference">
+            <div class="section-title">Reference</div>
+            <p class="section-sub">Use these links if you need to jump between the docs and the live homepage simulation.</p>
+            <div class="link-grid">
+                <a class="doc-link" href="index.html#how">
+                    <div>
+                        <strong>How it works</strong>
+                        <span>Merchant and payer demos with simple step-by-step screens.</span>
+                    </div>
+                    <div class="mini-icon green" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="M13 6l6 6-6 6"></path>
+                        </svg>
+                    </div>
+                </a>
+                <a class="doc-link" href="PROJECT_OVERVIEW.md">
+                    <div>
+                        <strong>Project overview</strong>
+                        <span>Repo-level written summary for the site and its simulations.</span>
+                    </div>
+                    <div class="mini-icon sky" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 4h7l3 3v13H7z"></path>
+                            <path d="M14 4v4h4"></path>
+                            <path d="M9 12h6"></path>
+                            <path d="M9 16h6"></path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Need the page flow?</div>
+            <p class="section-sub">The homepage still contains the live simulations. This docs page is only the written guide.</p>
+            <a class="btn primary" href="index.html#docs">View the homepage docs pointer</a>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-row">
+                <div>
+                    <div class="brand-name" style="font-size:22px">Sa<span>sula</span></div>
+                    <div class="muted">Cashless. Instant. Intelligent.</div>
+                </div>
+                <div class="subtle">Documentation page for the Sasula landing experience.</div>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

@@ -1094,7 +1094,7 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
+            z-index: 140;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1238,7 +1238,7 @@
             background: var(--ink-2);
             border-bottom: 1px solid var(--border-dark);
             padding: 20px 5vw 24px;
-            z-index: 99;
+            z-index: 150;
             flex-direction: column;
             gap: 0;
         }
@@ -1675,6 +1675,20 @@
             justify-content: center;
             font-size: 16px;
             flex-shrink: 0;
+            line-height: 0;
+        }
+
+        .float-badge-icon svg,
+        .receive-feature-icon svg,
+        .step-icon svg,
+        .feature-icon-wrap svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         
         .float-badge-text {
@@ -1768,6 +1782,7 @@
             justify-content: center;
             font-size: 20px;
             flex-shrink: 0;
+            line-height: 0;
         }
         
         .rf-sky {
@@ -2106,6 +2121,7 @@
             font-size: 22px;
             margin-bottom: 18px;
             border: 1px solid var(--border-gold);
+            line-height: 0;
         }
         
         .step-title {
@@ -2147,6 +2163,157 @@
         .btn-demo:hover {
             background: rgba(212, 137, 26, 0.18);
             transform: translateY(-2px);
+        }
+        /* ══════════════════════════════════════ JOURNEY + DOCS ══════════════════════════════════════ */
+
+        .journey-section,
+        .docs-section {
+            padding: 92px 5vw;
+        }
+
+        .journey-section {
+            background: var(--ink);
+        }
+
+        .journey-grid,
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .journey-card,
+        .docs-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-dark);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+        }
+
+        .journey-card h3,
+        .docs-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .journey-card p,
+        .docs-card p {
+            color: var(--text-dim);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .journey-steps,
+        .docs-list {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .journey-step,
+        .docs-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-bright);
+            text-decoration: none;
+        }
+
+        .journey-step-num {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gold-pale);
+            color: var(--gold-light);
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .journey-step strong,
+        .docs-link strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 2px;
+            color: white;
+        }
+
+        .journey-step span,
+        .docs-link span {
+            display: block;
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .journey-actions,
+        .docs-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .docs-card.featured {
+            background: linear-gradient(135deg, rgba(212, 137, 26, 0.12), rgba(28, 31, 34, 0.96));
+            border-color: var(--border-gold);
+        }
+
+        .docs-note {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 14px;
+        }
+        .icon-inline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .icon-inline svg {
+            width: 100%;
+            height: 100%;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-chip {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-bright);
+        }
+
+        .icon-chip svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         /* ══════════════════════════════════════ PARTNERS ══════════════════════════════════════ */
         
@@ -2237,6 +2404,7 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
+            line-height: 0;
         }
         
         .feature-icon-wrap.green {
@@ -3105,7 +3273,7 @@
                     <div class="form-group"> <label class="form-label">Expiry</label> <select class="form-input" id="inp-expiry" style="cursor:pointer"> <option value="24">24 hours</option> <option value="48">48 hours</option> <option value="72">72 hours</option> <option value="168">1 week</option> <option value="0">No expiry</option> </select>                        </div>
                     <div class="form-group"> <label class="form-label">Allow partial payment?</label> <select class="form-input" id="inp-partial" style="cursor:pointer"> <option value="no">No — full amount only</option> <option value="yes">Yes — any amount</option> </select>                        </div>
                     <div class="form-group"> <label class="form-label">Accepted providers</label>
-                        <div class="provider-grid"> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="mtn"><span class="provider-emoji">📱</span>MTN MoMo</button> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="airtel"><span class="provider-emoji">📲</span>Airtel</button>                            <button class="provider-btn" onclick="toggleProvider(this)" data-v="stanbic"><span class="provider-emoji">🏦</span>Stanbic</button> </div>
+                        <div class="provider-grid"> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="mtn"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3"></rect><path d="M9 7h6"></path><path d="M10 18h4"></path></svg></span>MTN MoMo</button> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="airtel"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M8 8c2-2 6-2 8 0"></path><path d="M6 11c3-4 9-4 12 0"></path><path d="M9 14c1.5-2 4.5-2 6 0"></path></svg></span>Airtel Money</button>                            <button class="provider-btn" onclick="toggleProvider(this)" data-v="stanbic"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21h16"></path><path d="M6 21V9h12v12"></path><path d="M6 9l6-5 6 5"></path><path d="M10 13v4"></path><path d="M14 13v4"></path></svg></span>Stanbic</button> </div>
                     </div> <button class="btn-flow-next" onclick="flowNext(2)">Generate my code →</button> <button class="btn-flow-back" onclick="flowBack(2)">← Back</button> </div>
                 <!-- PAGE 3 -->
                 <div class="flow-page" id="fp3">
@@ -3113,7 +3281,7 @@
                         <div class="code-result-label">Your payment code</div>
                         <div class="code-result-value" id="gen-code">KLA·0000</div>
                         <div class="code-result-sub" id="gen-expiry-label">Expires in 24 hours</div>
-                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')">💬 WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')">📱 SMS</button> <button class="code-share-btn" onclick="shareCode('copy')">📋 Copy</button>                            </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>SMS</button> <button class="code-share-btn" onclick="shareCode('copy')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button>                            </div>
                     </div>
                     <div class="payment-summary" id="gen-summary"></div> <button class="btn-flow-next" onclick="flowNext(3)">✓ Done — view receipt</button> </div>
                 <!-- PAGE 4 -->
@@ -3134,7 +3302,7 @@
         <div class="modal-box" style="max-width:580px"> <button class="modal-close" onclick="closeModal('receiveModal')">×</button>
             <div class="flow-wrap">
                 <!-- Tab nav -->
-                <div style="display:flex;gap:6px;margin-bottom:26px;background:var(--ink-4);border-radius:12px;padding:5px"> <button class="receive-tab-btn active" id="rtab-wallet" onclick="switchReceiveTab('wallet')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:var(--ink-3);color:white;transition:all 0.2s">💳 My Wallet</button>                    <button class="receive-tab-btn" id="rtab-methods" onclick="switchReceiveTab('methods')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--text-dim);transition:all 0.2s">📥 How to receive</button>                    <button class="receive-tab-btn" id="rtab-history" onclick="switchReceiveTab('history')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--text-dim);transition:all 0.2s">📋 History</button>                    </div>
+                <div style="display:flex;gap:6px;margin-bottom:26px;background:var(--ink-4);border-radius:12px;padding:5px"> <button class="receive-tab-btn active" id="rtab-wallet" onclick="switchReceiveTab('wallet')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:var(--ink-3);color:white;transition:all 0.2s"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h17v10H5a2 2 0 0 1-2-2z"></path><path d="M16 11h4"></path></svg></span>Wallet</button>                    <button class="receive-tab-btn" id="rtab-methods" onclick="switchReceiveTab('methods')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--text-dim);transition:all 0.2s"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 8h12v10H6z"></path><path d="M9 5h6"></path><path d="M8 12h8"></path></svg></span>Receive methods</button>                    <button class="receive-tab-btn" id="rtab-history" onclick="switchReceiveTab('history')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--text-dim);transition:all 0.2s"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2"></path><circle cx="12" cy="12" r="8"></circle></svg></span>History</button>                    </div>
                 <!-- WALLET TAB -->
                 <div class="receive-panel active" id="rpanel-wallet">
                     <div class="balance-card">
@@ -3158,7 +3326,7 @@
                         <div class="flow-subtitle" style="margin-bottom:18px">Choose where to send your balance</div>
                         <div class="withdraw-options">
                             <div class="withdraw-option selected" onclick="selectWithdraw(this)">
-                                <div class="withdraw-option-icon">📱</div>
+                                <div class="withdraw-option-icon"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M9 7h6M10 18h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></div>
                                 <div class="withdraw-option-text">
                                     <div class="withdraw-option-title">MTN Mobile Money</div>
                                     <div class="withdraw-option-sub">Instant · 0% fee</div>
@@ -3166,7 +3334,7 @@
                                 <div class="withdraw-option-check">✓</div>
                             </div>
                             <div class="withdraw-option" onclick="selectWithdraw(this)">
-                                <div class="withdraw-option-icon">📲</div>
+                                <div class="withdraw-option-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M8 8c2-2 6-2 8 0M6 11c3-4 9-4 12 0M9 14c1.5-2 4.5-2 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
                                 <div class="withdraw-option-text">
                                     <div class="withdraw-option-title">Airtel Money</div>
                                     <div class="withdraw-option-sub">Instant · 0% fee</div>
@@ -3174,7 +3342,7 @@
                                 <div class="withdraw-option-check"></div>
                             </div>
                             <div class="withdraw-option" onclick="selectWithdraw(this)">
-                                <div class="withdraw-option-icon">🏦</div>
+                                <div class="withdraw-option-icon"><svg viewBox="0 0 24 24"><path d="M4 21h16M6 21V9h12v12M6 9l6-5 6 5M10 13v4M14 13v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
                                 <div class="withdraw-option-text">
                                     <div class="withdraw-option-title">Bank transfer (Stanbic)</div>
                                     <div class="withdraw-option-sub">1–2 hours · Free</div>
@@ -3212,7 +3380,7 @@
                                 </div>
                             </div>
                             <div class="pending-item">
-                                <div class="pending-icon waiting">⏳</div>
+                                <div class="pending-icon waiting">Pending</div>
                                 <div class="pending-info">
                                     <div class="pending-reason">School term fees – Grade 4</div>
                                     <div class="pending-meta">KLA·8831 · Expires in 2h</div>
@@ -3237,12 +3405,12 @@
                 </div>
                 <!-- METHODS TAB -->
                 <div class="receive-panel" id="rpanel-methods" style="display:none">
-                    <div class="receive-header-tag">⬇ Receive money</div>
+                    <div class="receive-header-tag"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M7 10l5 5 5-5"></path></svg></span>Receive money</div>
                     <div class="flow-title" style="font-size:24px;margin-bottom:4px">How do you want to be paid?</div>
                     <div class="flow-subtitle" style="margin-bottom:20px">Pick a method and share it with your payer</div>
                     <div class="form-group"> <label class="form-label">Choose method</label>
-                        <div class="receive-method-grid"> <button class="receive-method-btn selected" id="rm-code" onclick="selectReceiveMethod('code')"> <span class="method-emoji">🔢</span> Payment Code <small>Human-readable · Works offline</small> </button> <button class="receive-method-btn"
-                                id="rm-link" onclick="selectReceiveMethod('link')"> <span class="method-emoji">🔗</span> Payment Link <small>Share a URL · Mobile-friendly</small> </button> <button class="receive-method-btn" id="rm-qr" onclick="selectReceiveMethod('qr')"> <span class="method-emoji">📷</span> QR Code <small>Scan to pay · Print-ready</small> </button>                            <button class="receive-method-btn" id="rm-bank" onclick="selectReceiveMethod('bank')"> <span class="method-emoji">🏦</span> Bank Details <small>Account number · SWIFT</small> </button> </div>
+                        <div class="receive-method-grid"> <button class="receive-method-btn selected" id="rm-code" onclick="selectReceiveMethod('code')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 8 5 12l4 4"></path><path d="M15 8l4 4-4 4"></path><path d="M14 6 10 18"></path></svg></span> Payment code <small>Human-readable · Works offline</small> </button> <button class="receive-method-btn"
+                            id="rm-link" onclick="selectReceiveMethod('link')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a4 4 0 0 1 0-6l2-2a4 4 0 0 1 6 6l-1 1"></path><path d="M14 11a4 4 0 0 1 0 6l-2 2a4 4 0 0 1-6-6l1-1"></path></svg></span> Payment link <small>Share a URL · Mobile-friendly</small> </button> <button class="receive-method-btn" id="rm-qr" onclick="selectReceiveMethod('qr')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3"></path><path d="M18 14h2v2"></path><path d="M14 18h2"></path></svg></span> QR code <small>Scan to pay · Print-ready</small> </button>                            <button class="receive-method-btn" id="rm-bank" onclick="selectReceiveMethod('bank')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21h16"></path><path d="M6 21V9h12v12"></path><path d="M6 9l6-5 6 5"></path><path d="M10 13v4"></path><path d="M14 13v4"></path></svg></span> Bank details <small>Account number · SWIFT</small> </button> </div>
                     </div>
                     <!-- Code method content -->
                     <div id="rm-content-code">
@@ -3251,13 +3419,13 @@
                             <div class="code-result-value" style="font-size:36px">KLA·7741</div>
                             <div class="code-result-sub">Share this code — payer enters it at sasula.ug</div>
                         </div>
-                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)">💬 WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)">📱 SMS</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)">📋 Copy</button> </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>SMS</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button> </div>
                     </div>
                     <!-- Link method content -->
                     <div id="rm-content-link" style="display:none">
                         <div class="link-display"> <span class="link-text">sasula.ug/pay/kla-7741</span> <button class="link-copy-btn" onclick="showToast('Link copied!','sasula.ug/pay/kla-7741')">Copy</button> </div>
                         <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px">Payer opens link, sees your request, and pays with their preferred Mobile Money provider — no app needed.</div>
-                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)">💬 WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)">📧 Email</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)">🔗 Copy</button> </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>Email</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button> </div>
                     </div>
                     <!-- QR method content -->
                     <div id="rm-content-qr" style="display:none">
@@ -3350,7 +3518,7 @@
                             </div>
                         </div>
                         <div style="text-align:center;font-size:12px;color:var(--text-dim);margin-bottom:12px">Print this QR and put it at your till, table, or entrance</div>
-                        <div class="code-share-row"> <button class="code-share-btn" onclick="showToast('Downloading QR…','Saving as PNG')" style="border-color:var(--border-sky)">⬇ Download PNG</button> <button class="code-share-btn" onclick="showToast('Opening print…','')" style="border-color:var(--border-sky)">🖨 Print</button>                            <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)">💬 Share</button> </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="showToast('Downloading QR…','Saving as PNG')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v10"></path><path d="M8 9l4 4 4-4"></path><path d="M5 17h14"></path></svg></span>Download PNG</button> <button class="code-share-btn" onclick="showToast('Opening print…','')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 8V4h10v4"></path><rect x="5" y="8" width="14" height="8" rx="2"></rect><path d="M8 16v4h8v-4"></path></svg></span>Print</button>                            <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>Share</button> </div>
                     </div>
                     <!-- Bank method content -->
                     <div id="rm-content-bank" style="display:none">
@@ -3404,7 +3572,7 @@
                             </div>
                         </div>
                         <div class="pending-item">
-                            <div class="pending-icon waiting">⏳</div>
+                                <div class="pending-icon waiting" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2"></path><path d="M12 3a9 9 0 1 0 9 9"></path><path d="M21 3v6h-6"></path></svg></div>
                             <div class="pending-info">
                                 <div class="pending-reason">School term fees – Grade 4</div>
                                 <div class="pending-meta">Issued today · KLA-8831 · Expires 6 PM</div>
@@ -3484,9 +3652,9 @@
                                                 <div class="demo-code-val">KLA·4829</div>
                                             </div>
                                             <div style="display:flex;gap:6px;margin-top:8px">
-                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">💬</div>
-                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">📋</div>
-                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">📱</div>
+                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">WhatsApp</div>
+                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">Copy</div>
+                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">SMS</div>
                                             </div>
                                         </div>
                                     </div>
@@ -3553,9 +3721,9 @@
                                         <div class="demo-phone-body">
                                             <div style="font-size:9px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px">Choose provider</div>
                                             <div style="display:flex;flex-direction:column;gap:6px">
-                                                <div style="background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.25);border-radius:8px;padding:10px;font-size:11px;color:white;display:flex;align-items:center;gap:7px">📱 MTN Mobile Money</div>
-                                                <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-dark);border-radius:8px;padding:10px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:7px">📲 Airtel Money</div>
-                                                <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-dark);border-radius:8px;padding:10px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:7px">🏦 Stanbic Bank</div>
+                                                <div style="background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.25);border-radius:8px;padding:10px;font-size:11px;color:white;display:flex;align-items:center;gap:7px">MTN Mobile Money</div>
+                                                <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-dark);border-radius:8px;padding:10px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:7px">Airtel Money</div>
+                                                <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-dark);border-radius:8px;padding:10px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:7px">Stanbic Bank</div>
                                             </div>
                                         </div>
                                     </div>
@@ -3599,7 +3767,7 @@
         </ul>
         <div class="nav-actions"> <a href="#" class="btn-ghost">Sign in</a> <button class="btn-primary" onclick="openModal('receiveModal')"> Receive payments <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>            </div> <button class="nav-hamburger" id="nav-ham" onclick="toggleMobileMenu()"> <span></span><span></span><span></span> </button> </nav>
     <!-- Mobile Menu -->
-    <div class="nav-mobile-menu" id="nav-mobile"> <a class="nav-mobile-link" href="#how" onclick="toggleMobileMenu()">How it works</a> <a class="nav-mobile-link" href="#receive" onclick="toggleMobileMenu()">Receive payments</a> <a class="nav-mobile-link" href="#features" onclick="toggleMobileMenu()">Features</a>        <a class="nav-mobile-link" href="#pricing" onclick="toggleMobileMenu()">Pricing</a> <a class="nav-mobile-link" href="#testimonials" onclick="toggleMobileMenu()">Stories</a>
+    <div class="nav-mobile-menu" id="nav-mobile"> <a class="nav-mobile-link" href="#journey" onclick="toggleMobileMenu()">User journey</a> <a class="nav-mobile-link" href="#how" onclick="toggleMobileMenu()">How it works</a> <a class="nav-mobile-link" href="#receive" onclick="toggleMobileMenu()">Receive payments</a> <a class="nav-mobile-link" href="docs.html" onclick="toggleMobileMenu()">Documentation</a>        <a class="nav-mobile-link" href="#pricing" onclick="toggleMobileMenu()">Pricing</a> <a class="nav-mobile-link" href="#testimonials" onclick="toggleMobileMenu()">Stories</a>
         <div class="nav-mobile-actions"> <a href="#" class="btn-ghost">Sign in</a> <button class="btn-primary" onclick="toggleMobileMenu();openModal('receiveModal')">Receive →</button> </div>
     </div>
     <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
@@ -3610,7 +3778,7 @@
                 <div class="hero-tag-dot"></div> Built in Uganda · For East Africa </div>
             <h1 class="hero-headline"> Money moves<br> <em>with purpose</em><br> in Uganda </h1>
             <p class="hero-sub"> <strong>Sasula</strong> is the payment request layer that every Mobile Money network was missing. Create a code, share it anywhere, get paid — with full context attached. </p>
-            <div class="hero-cta-row"> <button class="btn-large" onclick="openModal('requestModal')"> Start requesting <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-large sky-btn" onclick="openModal('receiveModal')"> Receive payments <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-outline-large" onclick="openModal('howModal')">▶ How it works</button> </div>
+                <div class="hero-cta-row"> <button class="btn-large" onclick="openModal('requestModal')"> Start requesting <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-large sky-btn" onclick="openModal('receiveModal')"> Receive payments <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-outline-large" onclick="openModal('howModal')">How it works</button> </div>
             <div class="hero-stats">
                 <div class="hero-stat"> <span class="hero-stat-num" id="txn-count">4,218</span> <span class="hero-stat-label">Live transactions</span> </div>
                 <div class="hero-stat-divider"></div>
@@ -3620,15 +3788,15 @@
             </div>
         </div>
         <div class="hero-right">
-            <div class="float-badge badge-1">
-                <div class="float-badge-icon" style="background:rgba(42,128,85,0.15)">✓</div>
+                <div class="float-badge badge-1">
+                    <div class="float-badge-icon" style="background:rgba(42,128,85,0.15)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg></div>
                 <div>
                     <div class="float-badge-text">Payment confirmed</div>
                     <div class="float-badge-sub">UGX 45,000 · KLA-4829</div>
                 </div>
             </div>
-            <div class="float-badge badge-2">
-                <div class="float-badge-icon" style="background:rgba(212,137,26,0.12)">📱</div>
+                <div class="float-badge badge-2">
+                    <div class="float-badge-icon" style="background:rgba(212,137,26,0.12)"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M9 7h6M10 18h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></div>
                 <div>
                     <div class="float-badge-text">Via MTN MoMo</div>
                     <div class="float-badge-sub">Just now · Ref: SS-7X9K</div>
@@ -3721,6 +3889,34 @@
             <div class="counter-item"><span class="counter-number" data-target="47">0</span><span class="counter-label">Avg seconds to pay</span></div>
         </div>
     </div>
+    <!-- JOURNEY -->
+    <section class="journey-section" id="journey">
+        <div class="section-label">User journey</div>
+        <h2 class="section-title" style="max-width:560px">From start requesting to receiving payment.</h2>
+        <p class="section-sub">Simple simulations for both sides of the exchange. Open the modals to try the flow, then follow the steps below to understand what happens.</p>
+        <div class="journey-grid">
+            <article class="journey-card">
+                <h3>Start requesting</h3>
+                <p>Create a request, customise the details, and share the code or link with the person paying you.</p>
+                <div class="journey-steps">
+                    <div class="journey-step"><div class="journey-step-num">1</div><div><strong>Enter amount and reason</strong><span>Use the request modal to define what you are collecting for.</span></div></div>
+                    <div class="journey-step"><div class="journey-step-num">2</div><div><strong>Generate a payment code</strong><span>Pick an expiry and send the code through WhatsApp, SMS, or copy it.</span></div></div>
+                    <div class="journey-step"><div class="journey-step-num">3</div><div><strong>Watch the receipt arrive</strong><span>The request stays live until it is paid, then the receipt updates automatically.</span></div></div>
+                </div>
+                <div class="journey-actions"><button class="btn-large" onclick="openModal('requestModal')">Start requesting</button></div>
+            </article>
+            <article class="journey-card">
+                <h3>Receive payments</h3>
+                <p>See incoming payments, switch between wallet, methods, and history, and move your balance when you are ready.</p>
+                <div class="journey-steps">
+                    <div class="journey-step"><div class="journey-step-num">1</div><div><strong>Open the receive dashboard</strong><span>Track balance, pending items, and recent payments in one place.</span></div></div>
+                    <div class="journey-step"><div class="journey-step-num">2</div><div><strong>Choose a payout path</strong><span>Move funds to MTN, Airtel, or bank details in the simple simulation.</span></div></div>
+                    <div class="journey-step"><div class="journey-step-num">3</div><div><strong>Keep a clean history</strong><span>Every simulated payment is recorded with a reference and timestamp.</span></div></div>
+                </div>
+                <div class="journey-actions"><button class="btn-large sky-btn" onclick="openModal('receiveModal')">Receive payments</button></div>
+            </article>
+        </div>
+    </section>
     <!-- HOW IT WORKS -->
     <div class="diagonal"></div>
     <section class="how-section" id="how">
@@ -3728,26 +3924,26 @@
         <h2 class="section-title">Three steps.<br>One seamless flow.</h2>
         <p class="section-sub">Sasula separates the request from the payment — so anyone can pay you, using any Mobile Money provider, with full context attached.</p>
         <div class="steps-grid">
-            <div class="step-card" onclick="openModal('requestModal')">
+                <div class="step-card" onclick="openModal('requestModal')">
                 <div class="step-number">STEP 01</div>
-                <div class="step-icon">✏️</div>
+                <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M7 17h10"></path><path d="M8 7h8"></path><path d="M8 12h8"></path><path d="M16 5l3 3-3 3"></path></svg></div>
                 <div class="step-title">Create your request</div>
                 <div class="step-desc">Enter the amount, a clear reason, your name or business, and an optional expiry. Tap to try it now.</div>
             </div>
             <div class="step-card" onclick="openModal('howModal')">
                 <div class="step-number">STEP 02</div>
-                <div class="step-icon">📤</div>
+                <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M4 12h16"></path><path d="M13 7l5 5-5 5"></path><path d="M8 9l-4 3 4 3"></path></svg></div>
                 <div class="step-title">Share a code or QR</div>
                 <div class="step-desc">Get a code like <strong style="color:var(--gold)">KLA-4829</strong> and a QR. Share via WhatsApp, SMS, print it, write it on a board — works everywhere.</div>
             </div>
             <div class="step-card" onclick="openModal('receiveModal')">
                 <div class="step-number">STEP 03</div>
-                <div class="step-icon">💸</div>
+                <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M12 4v16"></path><path d="M8 9h8"></path><path d="M8 15h8"></path><path d="M7 7c1.3-1.3 2.7-2 5-2s3.7.7 5 2"></path></svg></div>
                 <div class="step-title">Payer pays their way</div>
                 <div class="step-desc">The payer picks MTN, Airtel, or Stanbic and pays. Both get a receipt instantly. Track everything in Receive Payments.</div>
             </div>
         </div>
-        <div class="how-demo-cta"> <button class="btn-demo" onclick="openModal('howModal')"><span>▶</span> Interactive walkthrough</button> </div>
+        <div class="how-demo-cta"> <button class="btn-demo" onclick="openModal('howModal')">Interactive walkthrough</button> </div>
     </section>
     <div class="diagonal-reverse" style="background:var(--ink-3);height:80px;clip-path:polygon(0 0, 100% 0, 100% 100%, 0 60%)"></div>
     <!-- PARTNERS -->
@@ -3763,28 +3959,28 @@
         <div class="receive-grid">
             <div class="receive-features">
                 <div class="receive-feature active">
-                    <div class="receive-feature-icon rf-sky">📊</div>
+                    <div class="receive-feature-icon rf-sky"><svg viewBox="0 0 24 24"><path d="M4 20V8h16v12"></path><path d="M7 8V4h10v4"></path><path d="M8 12h8"></path><path d="M8 16h4"></path></svg></div>
                     <div>
                         <div class="receive-feature-title">Live payment dashboard</div>
                         <div class="receive-feature-desc">See every incoming payment in real time — amount, payer, provider, and timestamp. Your receive inbox, always current.</div>
                     </div>
                 </div>
                 <div class="receive-feature">
-                    <div class="receive-feature-icon rf-green">💰</div>
+                    <div class="receive-feature-icon rf-green"><svg viewBox="0 0 24 24"><path d="M12 3v18"></path><path d="M7 8h7a3 3 0 0 1 0 6H10a3 3 0 0 0 0 6h8"></path></svg></div>
                     <div>
                         <div class="receive-feature-title">Instant withdrawals</div>
                         <div class="receive-feature-desc">Move your balance to MTN MoMo, Airtel Money, or your Stanbic account with one tap. Zero processing fee.</div>
                     </div>
                 </div>
                 <div class="receive-feature">
-                    <div class="receive-feature-icon rf-gold">🔗</div>
+                    <div class="receive-feature-icon rf-gold"><svg viewBox="0 0 24 24"><path d="M10 13a4 4 0 0 1 0-6l2-2a4 4 0 0 1 6 6l-1 1"></path><path d="M14 11a4 4 0 0 1 0 6l-2 2a4 4 0 0 1-6-6l1-1"></path></svg></div>
                     <div>
                         <div class="receive-feature-title">Permanent receive link</div>
                         <div class="receive-feature-desc">Your Sasula link never expires. Share it once, collect forever — on WhatsApp bio, email signature, or business cards.</div>
                     </div>
                 </div>
                 <div class="receive-feature">
-                    <div class="receive-feature-icon rf-ember">🏦</div>
+                    <div class="receive-feature-icon rf-ember"><svg viewBox="0 0 24 24"><path d="M4 21h16"></path><path d="M6 21V9h12v12"></path><path d="M6 9l6-5 6 5"></path></svg></div>
                     <div>
                         <div class="receive-feature-title">Bank & MoMo reconciliation</div>
                         <div class="receive-feature-desc">Every payment is matched against your account automatically. Tax time is no longer a nightmare.</div>
@@ -3838,28 +4034,28 @@
         <div class="features-grid">
             <div class="features-list">
                 <div class="feature-item active" id="f1">
-                    <div class="feature-icon-wrap green">🔐</div>
+                    <div class="feature-icon-wrap green"><svg viewBox="0 0 24 24"><path d="M6 4h10l4 4v12H6z"></path><path d="M14 4v4h4"></path><path d="M8 13h8"></path><path d="M8 17h6"></path></svg></div>
                     <div>
                         <div class="feature-title">Structured receipts</div>
                         <div class="feature-desc">Every payment generates a receipt with amount, reason, timestamp, both parties' names, and a unique reference. Disputes end here.</div>
                     </div>
                 </div>
                 <div class="feature-item" id="f2">
-                    <div class="feature-icon-wrap amber">📶</div>
+                    <div class="feature-icon-wrap amber"><svg viewBox="0 0 24 24"><path d="M12 4v7"></path><path d="M6 11a6 6 0 1 0 12 0"></path><path d="M8 9l-2-2"></path><path d="M16 9l2-2"></path></svg></div>
                     <div>
                         <div class="feature-title">Offline-resilient codes</div>
                         <div class="feature-desc">Codes work via SMS, WhatsApp, printed receipts, chalkboards, or spoken aloud. Internet is optional for sharing.</div>
                     </div>
                 </div>
                 <div class="feature-item" id="f3">
-                    <div class="feature-icon-wrap red">🏪</div>
+                    <div class="feature-icon-wrap red"><svg viewBox="0 0 24 24"><path d="M4 21h16"></path><path d="M5 10h14"></path><path d="M6 10V6h12v4"></path><path d="M8 21v-6h8v6"></path></svg></div>
                     <div>
                         <div class="feature-title">Merchant mode</div>
                         <div class="feature-desc">Branded pages, analytics dashboard, staff accounts, and bulk request generation — everything a growing Ugandan business needs.</div>
                     </div>
                 </div>
                 <div class="feature-item" id="f4">
-                    <div class="feature-icon-wrap blue">👤</div>
+                    <div class="feature-icon-wrap blue"><svg viewBox="0 0 24 24"><path d="M12 3v18"></path><path d="M8 7h6a3 3 0 1 1 0 6H9a3 3 0 0 0 0 6h8"></path></svg></div>
                     <div>
                         <div class="feature-title">No account needed to pay</div>
                         <div class="feature-desc">Payers never need to register. Enter code, pick provider, pay in under 60 seconds. Zero friction, maximum adoption.</div>
@@ -4006,6 +4202,28 @@
         <p class="cta-sub">Join thousands of Ugandans already collecting payments the smarter way. Free to start, no card required.</p>
         <div class="cta-actions"> <button class="btn-cta" onclick="openModal('requestModal')">Create your first request →</button> <button class="btn-cta-outline" onclick="openModal('receiveModal')">Set up receiving</button> </div>
     </section>
+    <!-- DOCUMENTATION -->
+    <section class="docs-section" id="docs">
+        <div class="section-label">Documentation</div>
+        <h2 class="section-title" style="max-width:560px">The docs now live on a separate page.</h2>
+        <p class="section-sub">Use the dedicated guide for step-by-step reading. The homepage keeps the live simulations and points you to the written reference.</p>
+        <div class="docs-grid">
+            <article class="docs-card featured">
+                <h3>Open the guide</h3>
+                <p>The standalone docs page explains the request flow, receive flow, and the project overview in a cleaner reading format.</p>
+                <div class="docs-actions"><a class="btn-large" href="docs.html">Read the docs</a> <a class="btn-large sky-btn" href="PROJECT_OVERVIEW.md">Project overview</a></div>
+            </article>
+            <article class="docs-card">
+                <h3>What stays here</h3>
+                <p>The homepage still shows the product simulations, but the full written documentation is no longer duplicated here.</p>
+                <div class="docs-list">
+                    <a class="docs-link" href="#journey"><div class="journey-step-num">1</div><div><strong>User journey</strong><span>Request and receive flow summaries on the homepage.</span></div></a>
+                    <a class="docs-link" href="#how"><div class="journey-step-num">2</div><div><strong>Interactive demo</strong><span>Merchant and payer simulations on the homepage.</span></div></a>
+                </div>
+                <div class="docs-note">For full reading, use the standalone docs page instead of this homepage teaser.</div>
+            </article>
+        </div>
+    </section>
     <!-- FOOTER -->
     <footer>
         <div class="footer-top">
@@ -4017,11 +4235,11 @@
             </div>
             <div>
                 <div class="footer-col-title">Product</div>
-                <div class="footer-links"> <a href="#">How it works</a><a href="#">Pricing</a> <a href="#">For merchants</a><a href="#">For schools</a><a href="#">Changelog</a> </div>
+                <div class="footer-links"> <a href="#journey">User journey</a><a href="#how">How it works</a><a href="#pricing">Pricing</a> <a href="#receive">Receive payments</a><a href="docs.html">Documentation</a> </div>
             </div>
             <div>
                 <div class="footer-col-title">Developers</div>
-                <div class="footer-links"> <a href="#">Documentation</a><a href="#">API reference</a> <a href="#">SDKs</a><a href="#">Sandbox</a><a href="#">Status</a> </div>
+                <div class="footer-links"> <a href="docs.html">Documentation</a><a href="PROJECT_OVERVIEW.md">Project overview</a> <a href="docs.html">Getting started</a><a href="#receive">Receive guide</a><a href="#how">Demo</a> </div>
             </div>
             <div>
                 <div class="footer-col-title">Company</div>
@@ -4033,7 +4251,293 @@
         </div>
     </footer>
     <script>
-        // ══════════════════════════════════════ // MODAL SYSTEM // ══════════════════════════════════════ function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; } function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; } document.querySelectorAll('.modal-overlay').forEach(m => { m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); }); }); document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id)); }); // ══════════════════════════════════════ // TOAST // ══════════════════════════════════════ function showToast(text, sub) { const t = document.getElementById('toast'); document.getElementById('toast-text').textContent = text; document.getElementById('toast-sub').textContent = sub || ''; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500); } // ══════════════════════════════════════ // MOBILE NAV // ══════════════════════════════════════ function toggleMobileMenu() { const ham = document.getElementById('nav-ham'); const menu = document.getElementById('nav-mobile'); ham.classList.toggle('open'); menu.classList.toggle('open'); } // ══════════════════════════════════════ // REQUEST FLOW // ══════════════════════════════════════ let flowData = {}; function updateFlowDots(page) { for (let i = 1; i <= 4; i++) { const d = document.getElementById('rd' + i); if (!d) continue; if (i < page) { d.classList.remove('active'); d.classList.add('done'); } else if (i === page) { d.classList.add('active'); d.classList.remove('done'); } else { d.classList.remove('active','done'); } } } function showFlowPage(n) { document.querySelectorAll('#requestModal .flow-page').forEach(p => p.classList.remove('active')); const el = document.getElementById('fp' + n); if (el) el.classList.add('active'); updateFlowDots(n); } function flowNext(from) { if (from === 1) { const amount = document.getElementById('inp-amount').value; const reason = document.getElementById('inp-reason').value; const name = document.getElementById('inp-name').value; if (!amount || amount < 500) { showToast('Enter a valid amount', 'Minimum is UGX 500'); return; } if (!reason.trim()) { showToast('Please add a reason', 'e.g. School fees, Rent, Lunch'); return; } flowData.amount = parseInt(amount).toLocaleString(); flowData.reason = reason; flowData.name = name || 'Anonymous'; document.getElementById('flow-title').textContent = 'Customise your request'; document.getElementById('flow-subtitle').textContent = 'Optional settings for this payment'; showFlowPage(2); } else if (from === 2) { const expiry = document.getElementById('inp-expiry').value; flowData.expiry = expiry === '0' ? 'No expiry' : expiry + ' hours'; const prefixes = ['KLA','GUL','MBR','JIN','ENT','UGA']; const pre = prefixes[Math.floor(Math.random() * prefixes.length)]; const num = Math.floor(1000 + Math.random() * 9000); flowData.code = pre + '·' + num; document.getElementById('gen-code').textContent = flowData.code; document.getElementById('gen-expiry-label').textContent = 'Expires in ' + flowData.expiry; document.getElementById('final-code').textContent = flowData.code; document.getElementById('final-amount-label').textContent = 'UGX ' + flowData.amount + ' · Awaiting payment'; document.getElementById('gen-summary').innerHTML = ` <div class="payment-summary-row"><span class="ps-key">Amount</span><span class="ps-val">UGX ${flowData.amount}</span></div> <div class="payment-summary-row"><span class="ps-key">For</span><span class="ps-val">${flowData.reason}</span></div> <div class="payment-summary-row"><span class="ps-key">From</span><span class="ps-val">${flowData.name}</span></div> <div class="payment-summary-row"><span class="ps-key">Expires</span><span class="ps-val">${flowData.expiry}</span></div>`; document.getElementById('flow-title').textContent = 'Share your code'; document.getElementById('flow-subtitle').textContent = 'Your request is ready'; showFlowPage(3); } else if (from === 3) { document.getElementById('flow-title').textContent = "You're all set!"; document.getElementById('flow-subtitle').textContent = 'Your payment request is live'; showFlowPage(4); } } function flowBack(from) { showFlowPage(from - 1); if (from === 2) { document.getElementById('flow-title').textContent = 'Create a request'; document.getElementById('flow-subtitle').textContent = "Tell us what you're collecting for"; } } function toggleProvider(btn) { btn.classList.toggle('selected'); } function shareCode(method) { const code = flowData.code || 'SS-0000'; const msg = `Pay me UGX ${flowData.amount || ''} for "${flowData.reason || ''}" using code *${code}* on Sasula. Go to sasula.ug`; if (method === 'copy') { navigator.clipboard.writeText(msg).then(() => showToast('Copied!', code)).catch(() => showToast('Code: ' + code, '')); } else if (method === 'whatsapp') { window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); } else { showToast('Ready to share', code); } } // ══════════════════════════════════════ // RECEIVE MODAL TABS // ══════════════════════════════════════ function switchReceiveTab(tab) { ['wallet','methods','history'].forEach(t => { const btn = document.getElementById('rtab-' + t); const panel = document.getElementById('rpanel-' + t); const active = t === tab; if (btn) { btn.style.background = active ? 'var(--ink-3)' : 'transparent'; btn.style.color = active ? 'white' : 'var(--text-dim)'; } if (panel) { panel.style.display = active ? 'block' : 'none'; } }); } function selectWithdraw(el) { document.querySelectorAll('.withdraw-option').forEach(o => { o.classList.remove('selected'); const chk = o.querySelector('.withdraw-option-check'); if (chk) chk.textContent = ''; }); el.classList.add('selected'); const chk = el.querySelector('.withdraw-option-check'); if (chk) chk.textContent = '✓'; } function submitWithdraw() { const amt = document.getElementById('withdraw-amount').value; const phone = document.getElementById('withdraw-phone').value; if (!amt || amt < 1000) { showToast('Enter a valid amount', 'Minimum UGX 1,000'); return; } if (!phone.trim()) { showToast('Enter phone number', 'e.g. 0771234567'); return; } showToast('Withdrawal initiated!', 'UGX ' + parseInt(amt).toLocaleString() + ' → ' + phone); document.getElementById('withdraw-panel').style.display = 'none'; document.getElementById('wallet-main').style.display = 'block'; closeModal('receiveModal'); } // Receive methods let currentReceiveMethod = 'code'; function selectReceiveMethod(method) { ['code','link','qr','bank'].forEach(m => { const btn = document.getElementById('rm-' + m); const content = document.getElementById('rm-content-' + m); const active = m === method; if (btn) btn.classList.toggle('selected', active); if (content) content.style.display = active ? 'block' : 'none'; }); currentReceiveMethod = method; } // ══════════════════════════════════════ // HOW IT WORKS DEMO // ══════════════════════════════════════ function switchTab(tab) { document.querySelectorAll('.how-demo-tab').forEach((t, i) => { t.classList.toggle('active', (i === 0 && tab === 'merchant') || (i === 1 && tab === 'payer')); }); document.getElementById('tab-merchant').classList.toggle('active', tab === 'merchant'); document.getElementById('tab-payer').classList.toggle('active', tab === 'payer'); } function merchantStep(n) { ['ms1','ms2','ms3'].forEach((id, i) => { const el = document.getElementById(id); if(el) el.classList.toggle('active', i+1===n); }); updateDemoInds('merchant-inds', n); } function payerStep(n) { ['ps1','ps2','ps3'].forEach((id, i) => { const el = document.getElementById(id); if(el) el.classList.toggle('active', i+1===n); }); updateDemoInds('payer-inds', n); } function updateDemoInds(containerId, active) { const c = document.getElementById(containerId); if (!c) return; c.querySelectorAll('.demo-step-ind').forEach((d, i) => d.classList.toggle('active', i+1===active)); } // ══════════════════════════════════════ // COUNTERS // ══════════════════════════════════════ function animateCounter(el, target, duration = 2000) { let start = 0; const step = target / (duration / 16); const timer = setInterval(() => { start += step; if (start >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); return; } el.textContent = Math.floor(start).toLocaleString(); }, 16); } const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target, parseInt(e.target.dataset.target)); obs.unobserve(e.target); }}); }, { threshold: 0.5 }); document.querySelectorAll('.counter-number[data-target]').forEach(c => obs.observe(c)); let txnCount = 4218; const txnEl = document.getElementById('txn-count'); if (txnEl) { txnEl.textContent = txnCount.toLocaleString(); setInterval(() => { txnCount += Math.floor(Math.random()*3)+1; txnEl.textContent = txnCount.toLocaleString(); }, 3000); } // ══════════════════════════════════════ // FEATURE HOVER // ══════════════════════════════════════ document.querySelectorAll('.feature-item, .receive-feature').forEach(item => { item.addEventListener('mouseenter', () => { item.closest('.features-list, .receive-features').querySelectorAll('.feature-item, .receive-feature').forEach(i => i.classList.remove('active')); item.classList.add('active'); }); }); // ══════════════════════════════════════ // NAV SCROLL // ══════════════════════════════════════ window.addEventListener('scroll', () => { const nav = document.getElementById('main-nav'); if (window.scrollY > 20) { nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.4)'; nav.style.background = 'rgba(11,13,15,0.97)'; } else { nav.style.boxShadow = 'none'; nav.style.background = 'rgba(11,13,15,0.9)'; } });
+        function openModal(id) {
+            document.getElementById(id).classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.modal-overlay').forEach(m => {
+            m.addEventListener('click', e => {
+                if (e.target === m) closeModal(m.id);
+            });
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+        });
+
+        function showToast(text, sub) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-text').textContent = text;
+            document.getElementById('toast-sub').textContent = sub || '';
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3500);
+        }
+
+        function toggleMobileMenu(forceOpen) {
+            const ham = document.getElementById('nav-ham');
+            const menu = document.getElementById('nav-mobile');
+            const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !menu.classList.contains('open');
+            ham.classList.toggle('open', shouldOpen);
+            menu.classList.toggle('open', shouldOpen);
+            ham.setAttribute('aria-expanded', String(shouldOpen));
+            document.body.style.overflow = shouldOpen ? 'hidden' : '';
+        }
+
+        let flowData = {};
+
+        function updateFlowDots(page) {
+            for (let i = 1; i <= 4; i++) {
+                const d = document.getElementById('rd' + i);
+                if (!d) continue;
+                if (i < page) {
+                    d.classList.remove('active');
+                    d.classList.add('done');
+                } else if (i === page) {
+                    d.classList.add('active');
+                    d.classList.remove('done');
+                } else {
+                    d.classList.remove('active', 'done');
+                }
+            }
+        }
+
+        function showFlowPage(n) {
+            document.querySelectorAll('#requestModal .flow-page').forEach(p => p.classList.remove('active'));
+            const el = document.getElementById('fp' + n);
+            if (el) el.classList.add('active');
+            updateFlowDots(n);
+        }
+
+        function flowNext(from) {
+            if (from === 1) {
+                const amount = document.getElementById('inp-amount').value;
+                const reason = document.getElementById('inp-reason').value;
+                const name = document.getElementById('inp-name').value;
+                if (!amount || amount < 500) {
+                    showToast('Enter a valid amount', 'Minimum is UGX 500');
+                    return;
+                }
+                if (!reason.trim()) {
+                    showToast('Please add a reason', 'e.g. School fees, Rent, Lunch');
+                    return;
+                }
+                flowData.amount = parseInt(amount).toLocaleString();
+                flowData.reason = reason;
+                flowData.name = name || 'Anonymous';
+                document.getElementById('flow-title').textContent = 'Customise your request';
+                document.getElementById('flow-subtitle').textContent = 'Optional settings for this payment';
+                showFlowPage(2);
+            } else if (from === 2) {
+                const expiry = document.getElementById('inp-expiry').value;
+                flowData.expiry = expiry === '0' ? 'No expiry' : expiry + ' hours';
+                const prefixes = ['KLA', 'GUL', 'MBR', 'JIN', 'ENT', 'UGA'];
+                const pre = prefixes[Math.floor(Math.random() * prefixes.length)];
+                const num = Math.floor(1000 + Math.random() * 9000);
+                flowData.code = pre + '·' + num;
+                document.getElementById('gen-code').textContent = flowData.code;
+                document.getElementById('gen-expiry-label').textContent = 'Expires in ' + flowData.expiry;
+                document.getElementById('final-code').textContent = flowData.code;
+                document.getElementById('final-amount-label').textContent = 'UGX ' + flowData.amount + ' · Awaiting payment';
+                document.getElementById('gen-summary').innerHTML = `
+                    <div class="payment-summary-row"><span class="ps-key">Amount</span><span class="ps-val">UGX ${flowData.amount}</span></div>
+                    <div class="payment-summary-row"><span class="ps-key">For</span><span class="ps-val">${flowData.reason}</span></div>
+                    <div class="payment-summary-row"><span class="ps-key">From</span><span class="ps-val">${flowData.name}</span></div>
+                    <div class="payment-summary-row"><span class="ps-key">Expires</span><span class="ps-val">${flowData.expiry}</span></div>`;
+                document.getElementById('flow-title').textContent = 'Share your code';
+                document.getElementById('flow-subtitle').textContent = 'Your request is ready';
+                showFlowPage(3);
+            } else if (from === 3) {
+                document.getElementById('flow-title').textContent = "You're all set!";
+                document.getElementById('flow-subtitle').textContent = 'Your payment request is live';
+                showFlowPage(4);
+            }
+        }
+
+        function flowBack(from) {
+            showFlowPage(from - 1);
+            if (from === 2) {
+                document.getElementById('flow-title').textContent = 'Create a request';
+                document.getElementById('flow-subtitle').textContent = "Tell us what you're collecting for";
+            }
+        }
+
+        function toggleProvider(btn) {
+            btn.classList.toggle('selected');
+        }
+
+        function shareCode(method) {
+            const code = flowData.code || 'SS-0000';
+            const msg = `Pay me UGX ${flowData.amount || ''} for "${flowData.reason || ''}" using code *${code}* on Sasula. Go to sasula.ug`;
+            if (method === 'copy') {
+                navigator.clipboard.writeText(msg).then(() => showToast('Copied!', code)).catch(() => showToast('Code: ' + code, ''));
+            } else if (method === 'whatsapp') {
+                window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+            } else {
+                showToast('Ready to share', code);
+            }
+        }
+
+        function switchReceiveTab(tab) {
+            ['wallet', 'methods', 'history'].forEach(t => {
+                const btn = document.getElementById('rtab-' + t);
+                const panel = document.getElementById('rpanel-' + t);
+                const active = t === tab;
+                if (btn) {
+                    btn.style.background = active ? 'var(--ink-3)' : 'transparent';
+                    btn.style.color = active ? 'white' : 'var(--text-dim)';
+                }
+                if (panel) {
+                    panel.style.display = active ? 'block' : 'none';
+                }
+            });
+        }
+
+        function selectWithdraw(el) {
+            document.querySelectorAll('.withdraw-option').forEach(o => {
+                o.classList.remove('selected');
+                const chk = o.querySelector('.withdraw-option-check');
+                if (chk) chk.textContent = '';
+            });
+            el.classList.add('selected');
+            const chk = el.querySelector('.withdraw-option-check');
+            if (chk) chk.textContent = '✓';
+        }
+
+        function submitWithdraw() {
+            const amt = document.getElementById('withdraw-amount').value;
+            const phone = document.getElementById('withdraw-phone').value;
+            if (!amt || amt < 1000) {
+                showToast('Enter a valid amount', 'Minimum UGX 1,000');
+                return;
+            }
+            if (!phone.trim()) {
+                showToast('Enter phone number', 'e.g. 0771234567');
+                return;
+            }
+            showToast('Withdrawal initiated!', 'UGX ' + parseInt(amt).toLocaleString() + ' → ' + phone);
+            document.getElementById('withdraw-panel').style.display = 'none';
+            document.getElementById('wallet-main').style.display = 'block';
+            closeModal('receiveModal');
+        }
+
+        let currentReceiveMethod = 'code';
+
+        function selectReceiveMethod(method) {
+            ['code', 'link', 'qr', 'bank'].forEach(m => {
+                const btn = document.getElementById('rm-' + m);
+                const content = document.getElementById('rm-content-' + m);
+                const active = m === method;
+                if (btn) btn.classList.toggle('selected', active);
+                if (content) content.style.display = active ? 'block' : 'none';
+            });
+            currentReceiveMethod = method;
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.how-demo-tab').forEach((t, i) => {
+                t.classList.toggle('active', (i === 0 && tab === 'merchant') || (i === 1 && tab === 'payer'));
+            });
+            document.getElementById('tab-merchant').classList.toggle('active', tab === 'merchant');
+            document.getElementById('tab-payer').classList.toggle('active', tab === 'payer');
+        }
+
+        function merchantStep(n) {
+            ['ms1', 'ms2', 'ms3'].forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('active', i + 1 === n);
+            });
+            updateDemoInds('merchant-inds', n);
+        }
+
+        function payerStep(n) {
+            ['ps1', 'ps2', 'ps3'].forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('active', i + 1 === n);
+            });
+            updateDemoInds('payer-inds', n);
+        }
+
+        function updateDemoInds(containerId, active) {
+            const c = document.getElementById(containerId);
+            if (!c) return;
+            c.querySelectorAll('.demo-step-ind').forEach((d, i) => d.classList.toggle('active', i + 1 === active));
+        }
+
+        function animateCounter(el, target, duration = 2000) {
+            if (el.dataset.animated === 'true') return;
+            el.dataset.animated = 'true';
+            let start = 0;
+            const step = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += step;
+                if (start >= target) {
+                    el.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                    return;
+                }
+                el.textContent = Math.floor(start).toLocaleString();
+            }, 16);
+        }
+
+        function runCounters() {
+            document.querySelectorAll('.counter-number[data-target]').forEach(counter => {
+                const target = parseInt(counter.dataset.target, 10);
+                if (Number.isFinite(target)) {
+                    animateCounter(counter, target);
+                }
+            });
+        }
+
+        if ('IntersectionObserver' in window) {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target, parseInt(entry.target.dataset.target, 10));
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.45 });
+
+            document.querySelectorAll('.counter-number[data-target]').forEach(counter => obs.observe(counter));
+        }
+
+        runCounters();
+
+        let txnCount = 4218;
+        const txnEl = document.getElementById('txn-count');
+        if (txnEl) {
+            txnEl.textContent = txnCount.toLocaleString();
+            setInterval(() => {
+                txnCount += Math.floor(Math.random() * 3) + 1;
+                txnEl.textContent = txnCount.toLocaleString();
+            }, 3000);
+        }
+
+        document.querySelectorAll('.feature-item, .receive-feature').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const group = item.closest('.features-list, .receive-features');
+                if (!group) return;
+                group.querySelectorAll('.feature-item, .receive-feature').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 20) {
+                nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.4)';
+                nav.style.background = 'rgba(11,13,15,0.97)';
+            } else {
+                nav.style.boxShadow = 'none';
+                nav.style.background = 'rgba(11,13,15,0.9)';
+            }
+        });
     </script>
 </body>
 
