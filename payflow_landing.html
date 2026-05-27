@@ -1,0 +1,4040 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sasula — Cashless. Instant. Intelligent.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+         :root {
+            --gold: #D4891A;
+            --gold-light: #F0A830;
+            --gold-pale: rgba(212, 137, 26, 0.12);
+            --ember: #C1440E;
+            --forest: #1A5C3A;
+            --forest-light: #2A8055;
+            --sky: #1A6B8A;
+            --sky-light: #2490B8;
+            --ink: #0B0D0F;
+            --ink-2: #141618;
+            --ink-3: #1C1F22;
+            --ink-4: #242830;
+            --steel: #2E3338;
+            --mist: rgba(255, 255, 255, 0.06);
+            --mist-2: rgba(255, 255, 255, 0.1);
+            --mist-3: rgba(255, 255, 255, 0.15);
+            --text-dim: rgba(255, 255, 255, 0.45);
+            --text-mid: rgba(255, 255, 255, 0.7);
+            --text-bright: rgba(255, 255, 255, 0.92);
+            --border-dark: rgba(255, 255, 255, 0.07);
+            --border-gold: rgba(212, 137, 26, 0.25);
+            --border-sky: rgba(36, 144, 184, 0.3);
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--ink);
+            color: var(--text-bright);
+            overflow-x: hidden;
+        }
+        /* ══════════════════════════════════════ MODAL SYSTEM ══════════════════════════════════════ */
+        
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 16px;
+        }
+        
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-box {
+            background: var(--ink-3);
+            border: 1px solid var(--border-dark);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 560px;
+            max-height: 92vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px) scale(0.97);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+        }
+        
+        .modal-overlay.open .modal-box {
+            transform: translateY(0) scale(1);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--mist);
+            border: 1px solid var(--border-dark);
+            color: var(--text-mid);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+        
+        .modal-close:hover {
+            background: var(--mist-2);
+            color: white;
+        }
+        /* ══════════════════════════════════════ SHARED FORM ELEMENTS ══════════════════════════════════════ */
+        
+        .flow-wrap {
+            padding: 36px 36px 28px;
+        }
+        
+        .flow-steps-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 28px;
+        }
+        
+        .flow-step-dot {
+            height: 3px;
+            flex: 1;
+            border-radius: 3px;
+            background: var(--mist-2);
+            transition: background 0.3s;
+        }
+        
+        .flow-step-dot.active {
+            background: var(--gold);
+        }
+        
+        .flow-step-dot.done {
+            background: var(--forest-light);
+        }
+        
+        .flow-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .flow-subtitle {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 28px;
+        }
+        
+        .flow-page {
+            display: none;
+        }
+        
+        .flow-page.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 13px 16px;
+            background: var(--ink-4);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+            -webkit-appearance: none;
+        }
+        
+        .form-input:focus {
+            border-color: var(--gold);
+        }
+        
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .form-input-prefix-wrap {
+            position: relative;
+        }
+        
+        .form-input-prefix {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dim);
+            font-family: 'DM Mono', monospace;
+        }
+        
+        .form-input.has-prefix {
+            padding-left: 68px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 4px;
+        }
+        
+        .provider-btn {
+            padding: 12px 8px;
+            background: var(--ink-4);
+            border: 2px solid var(--border-dark);
+            border-radius: 12px;
+            color: var(--text-mid);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .provider-btn .provider-emoji {
+            font-size: 20px;
+        }
+        
+        .provider-btn:hover {
+            border-color: var(--gold-light);
+            color: white;
+        }
+        
+        .provider-btn.selected {
+            border-color: var(--gold);
+            background: var(--gold-pale);
+            color: white;
+        }
+        
+        .btn-flow-next {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--gold), var(--ember));
+            border: none;
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-flow-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 137, 26, 0.3);
+        }
+        
+        .btn-flow-next.sky {
+            background: linear-gradient(135deg, var(--sky), var(--sky-light));
+        }
+        
+        .btn-flow-next.sky:hover {
+            box-shadow: 0 8px 24px rgba(36, 144, 184, 0.3);
+        }
+        
+        .btn-flow-back {
+            width: 100%;
+            padding: 13px;
+            background: transparent;
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            color: var(--text-dim);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+        
+        .btn-flow-back:hover {
+            border-color: var(--mist-3);
+            color: var(--text-mid);
+        }
+        
+        .code-result-box {
+            background: var(--ink-4);
+            border: 1px solid var(--border-gold);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        
+        .code-result-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+        
+        .code-result-value {
+            font-family: 'DM Mono', monospace;
+            font-size: 40px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 6px;
+            margin-bottom: 6px;
+        }
+        
+        .code-result-sub {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        .code-share-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 14px;
+        }
+        
+        .code-share-btn {
+            padding: 10px 6px;
+            background: var(--mist);
+            border: 1px solid var(--border-dark);
+            border-radius: 10px;
+            color: var(--text-mid);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .code-share-btn:hover {
+            background: var(--mist-2);
+            color: white;
+        }
+        
+        .payment-summary {
+            background: var(--ink-4);
+            border: 1px solid var(--border-dark);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+        
+        .payment-summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border-dark);
+            font-size: 13px;
+        }
+        
+        .payment-summary-row:last-child {
+            border-bottom: none;
+        }
+        
+        .ps-key {
+            color: var(--text-dim);
+        }
+        
+        .ps-val {
+            font-weight: 600;
+            color: var(--text-bright);
+        }
+        
+        .success-ring {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(42, 128, 85, 0.15);
+            border: 2px solid var(--forest-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 18px;
+            animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+        
+        @keyframes successPop {
+            from {
+                transform: scale(0);
+                opacity: 0
+            }
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+        /* ══════════════════════════════════════ RECEIVE PAYMENTS MODAL ══════════════════════════════════════ */
+        
+        .receive-step-dot {
+            height: 3px;
+            flex: 1;
+            border-radius: 3px;
+            background: var(--mist-2);
+            transition: background 0.3s;
+        }
+        
+        .receive-step-dot.active {
+            background: var(--sky-light);
+        }
+        
+        .receive-step-dot.done {
+            background: var(--forest-light);
+        }
+        
+        .receive-header-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(36, 144, 184, 0.1);
+            border: 1px solid var(--border-sky);
+            border-radius: 100px;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--sky-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        
+        .receive-method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 4px;
+        }
+        
+        .receive-method-btn {
+            padding: 16px 12px;
+            background: var(--ink-4);
+            border: 2px solid var(--border-dark);
+            border-radius: 14px;
+            color: var(--text-mid);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .receive-method-btn .method-emoji {
+            font-size: 26px;
+        }
+        
+        .receive-method-btn:hover {
+            border-color: var(--sky-light);
+            color: white;
+            background: rgba(36, 144, 184, 0.06);
+        }
+        
+        .receive-method-btn.selected {
+            border-color: var(--sky-light);
+            background: rgba(36, 144, 184, 0.1);
+            color: white;
+        }
+        
+        .receive-method-btn small {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-weight: 400;
+            display: block;
+            margin-top: 2px;
+        }
+        /* Bank account display */
+        
+        .bank-details-card {
+            background: var(--ink-4);
+            border: 1px solid var(--border-sky);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 18px;
+        }
+        
+        .bank-detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        
+        .bank-detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .bank-detail-key {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        .bank-detail-val {
+            font-family: 'DM Mono', monospace;
+            font-size: 14px;
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-mini {
+            padding: 4px 10px;
+            background: var(--mist);
+            border: 1px solid var(--border-dark);
+            border-radius: 6px;
+            font-size: 10px;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+        }
+        
+        .copy-mini:hover {
+            background: var(--mist-2);
+            color: white;
+        }
+        /* Payment link display */
+        
+        .link-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--ink-4);
+            border: 1px solid var(--border-sky);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+        }
+        
+        .link-text {
+            flex: 1;
+            font-family: 'DM Mono', monospace;
+            font-size: 13px;
+            color: var(--sky-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .link-copy-btn {
+            flex-shrink: 0;
+            padding: 8px 14px;
+            background: var(--sky);
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .link-copy-btn:hover {
+            background: var(--sky-light);
+        }
+        /* QR code mock */
+        
+        .qr-display {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0;
+        }
+        
+        .qr-mock-wrap {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            display: inline-block;
+        }
+        
+        .qr-mock-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 2px;
+            width: 130px;
+            height: 130px;
+        }
+        
+        .qm {
+            border-radius: 1px;
+        }
+        
+        .qm.b {
+            background: #111;
+        }
+        
+        .qm.w {
+            background: white;
+        }
+        /* Pending list */
+        
+        .pending-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        
+        .pending-item {
+            background: var(--ink-4);
+            border: 1px solid var(--border-dark);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .pending-item:hover {
+            border-color: var(--border-gold);
+        }
+        
+        .pending-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .pending-icon.waiting {
+            background: rgba(212, 137, 26, 0.12);
+        }
+        
+        .pending-icon.paid {
+            background: rgba(42, 128, 85, 0.12);
+        }
+        
+        .pending-icon.partial {
+            background: rgba(36, 144, 184, 0.12);
+        }
+        
+        .pending-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .pending-reason {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .pending-meta {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+        
+        .pending-amount {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        
+        .pending-amount-val {
+            font-family: 'DM Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .pending-status {
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        
+        .pending-status.waiting {
+            color: var(--gold);
+        }
+        
+        .pending-status.paid {
+            color: var(--forest-light);
+        }
+        
+        .pending-status.partial {
+            color: var(--sky-light);
+        }
+        /* balance card */
+        
+        .balance-card {
+            background: linear-gradient(135deg, var(--forest) 0%, #0f3d26 100%);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .balance-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+        
+        .balance-amount {
+            font-family: 'DM Mono', monospace;
+            font-size: 36px;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .balance-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .balance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        
+        .balance-mini {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+        }
+        
+        .balance-mini-label {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        
+        .balance-mini-val {
+            font-family: 'DM Mono', monospace;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        /* withdraw flow */
+        
+        .withdraw-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        
+        .withdraw-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--ink-4);
+            border: 2px solid var(--border-dark);
+            border-radius: 14px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .withdraw-option:hover {
+            border-color: var(--forest-light);
+        }
+        
+        .withdraw-option.selected {
+            border-color: var(--forest-light);
+            background: rgba(42, 128, 85, 0.08);
+        }
+        
+        .withdraw-option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(42, 128, 85, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .withdraw-option-text {
+            flex: 1;
+        }
+        
+        .withdraw-option-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .withdraw-option-sub {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+        
+        .withdraw-option-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            transition: all 0.2s;
+        }
+        
+        .withdraw-option.selected .withdraw-option-check {
+            background: var(--forest-light);
+            border-color: var(--forest-light);
+            color: white;
+        }
+        /* ══════════════════════════════════════ HOW IT WORKS DEMO MODAL ══════════════════════════════════════ */
+        
+        .how-demo {
+            padding: 0;
+        }
+        
+        .how-demo-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-dark);
+            padding: 20px 28px 0;
+            gap: 4px;
+            overflow-x: auto;
+        }
+        
+        .how-demo-tab {
+            padding: 10px 16px;
+            border-radius: 10px 10px 0 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            border-bottom: none;
+            white-space: nowrap;
+        }
+        
+        .how-demo-tab.active {
+            background: var(--ink-4);
+            color: var(--gold);
+            border-color: var(--border-dark);
+            margin-bottom: -1px;
+        }
+        
+        .how-demo-body {
+            padding: 28px;
+        }
+        
+        .how-demo-panel {
+            display: none;
+        }
+        
+        .how-demo-panel.active {
+            display: block;
+        }
+        
+        .demo-phone-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .demo-phone {
+            width: 240px;
+            background: var(--ink-4);
+            border: 1px solid var(--border-dark);
+            border-radius: 36px;
+            padding: 10px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .demo-phone-screen {
+            background: #111316;
+            border-radius: 28px;
+            overflow: hidden;
+            min-height: 380px;
+        }
+        
+        .demo-phone-bar {
+            background: var(--forest);
+            padding: 24px 14px 14px;
+            color: white;
+            text-align: center;
+        }
+        
+        .demo-phone-bar-label {
+            font-size: 9px;
+            font-weight: 700;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 3px;
+        }
+        
+        .demo-phone-bar-amount {
+            font-family: 'DM Mono', monospace;
+            font-size: 28px;
+            font-weight: 500;
+        }
+        
+        .demo-phone-bar-reason {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+        
+        .demo-phone-body {
+            padding: 14px;
+        }
+        
+        .demo-code-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .demo-code-label {
+            font-size: 8px;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
+        }
+        
+        .demo-code-val {
+            font-family: 'DM Mono', monospace;
+            font-size: 22px;
+            letter-spacing: 4px;
+            color: white;
+        }
+        
+        .demo-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 10px;
+        }
+        
+        .demo-detail-k {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .demo-detail-v {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .demo-caption {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.65;
+            max-width: 360px;
+            margin: 0 auto 16px;
+        }
+        
+        .demo-step-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        
+        .demo-step-ind {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--mist-2);
+            transition: all 0.3s;
+        }
+        
+        .demo-step-ind.active {
+            background: var(--gold);
+            width: 24px;
+            border-radius: 4px;
+        }
+        
+        .demo-nav-row {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .demo-btn-prev,
+        .demo-btn-next {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .demo-btn-prev {
+            background: var(--mist);
+            border: 1px solid var(--border-dark);
+            color: var(--text-mid);
+        }
+        
+        .demo-btn-next {
+            background: var(--gold);
+            border: none;
+            color: white;
+        }
+        
+        .demo-btn-prev:hover {
+            background: var(--mist-2);
+        }
+        
+        .demo-btn-next:hover {
+            background: var(--gold-light);
+        }
+        /* ══════════════════════════════════════ NAV ══════════════════════════════════════ */
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5vw;
+            height: 68px;
+            background: rgba(11, 13, 15, 0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dark);
+            transition: all 0.3s;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+        }
+        
+        .nav-logo-svg {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+        }
+        
+        .nav-logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 23px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-logo-text span {
+            color: var(--gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-dim);
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-ghost {
+            padding: 9px 18px;
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            background: transparent;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-mid);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .btn-ghost:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .btn-primary {
+            padding: 10px 20px;
+            background: var(--gold);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+        /* Hamburger */
+        
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            background: none;
+            border: none;
+        }
+        
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-mid);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        
+        .nav-hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        
+        .nav-hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 68px;
+            left: 0;
+            right: 0;
+            background: var(--ink-2);
+            border-bottom: 1px solid var(--border-dark);
+            padding: 20px 5vw 24px;
+            z-index: 99;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .nav-mobile-menu.open {
+            display: flex;
+        }
+        
+        .nav-mobile-link {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-dark);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-mid);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .nav-mobile-link:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-mobile-link:hover {
+            color: var(--gold);
+        }
+        
+        .nav-mobile-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        
+        .nav-mobile-actions .btn-ghost,
+        .nav-mobile-actions .btn-primary {
+            flex: 1;
+            text-align: center;
+            justify-content: center;
+        }
+        /* ══════════════════════════════════════ HERO ══════════════════════════════════════ */
+        
+        .hero {
+            min-height: 100vh;
+            padding: 112px 5vw 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--ink);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 65% 30%, rgba(212, 137, 26, 0.13) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 10% 70%, rgba(26, 92, 58, 0.12) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 90% 80%, rgba(193, 68, 14, 0.07) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 64px 64px;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+        }
+        
+        .hero-left {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 137, 26, 0.1);
+            border: 1px solid var(--border-gold);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 26px;
+            width: fit-content;
+            animation: fadeUp 0.6s ease both;
+        }
+        
+        .hero-tag-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(1.5)
+            }
+        }
+        
+        .hero-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(48px, 5.5vw, 78px);
+            font-weight: 700;
+            line-height: 1.03;
+            color: white;
+            margin-bottom: 22px;
+            animation: fadeUp 0.6s 0.1s ease both;
+        }
+        
+        .hero-headline em {
+            font-style: italic;
+            color: var(--gold);
+        }
+        
+        .hero-sub {
+            font-size: 17px;
+            font-weight: 300;
+            color: var(--text-dim);
+            line-height: 1.75;
+            max-width: 480px;
+            margin-bottom: 36px;
+            animation: fadeUp 0.6s 0.2s ease both;
+        }
+        
+        .hero-sub strong {
+            font-weight: 600;
+            color: var(--text-mid);
+        }
+        
+        .hero-cta-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 52px;
+            animation: fadeUp 0.6s 0.3s ease both;
+            flex-wrap: wrap;
+        }
+        
+        .btn-large {
+            padding: 15px 28px;
+            background: linear-gradient(135deg, var(--gold), var(--ember));
+            border: none;
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 32px rgba(212, 137, 26, 0.25);
+        }
+        
+        .btn-large:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(212, 137, 26, 0.35);
+        }
+        
+        .btn-large.sky-btn {
+            background: linear-gradient(135deg, var(--sky), var(--sky-light));
+            box-shadow: 0 8px 32px rgba(36, 144, 184, 0.2);
+        }
+        
+        .btn-large.sky-btn:hover {
+            box-shadow: 0 14px 40px rgba(36, 144, 184, 0.3);
+        }
+        
+        .btn-outline-large {
+            padding: 14px 28px;
+            background: var(--mist);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-mid);
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-outline-large:hover {
+            border-color: var(--border-gold);
+            color: var(--gold);
+            background: var(--gold-pale);
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 28px;
+            animation: fadeUp 0.6s 0.4s ease both;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .hero-stat-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 22px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .hero-stat-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero-stat-divider {
+            width: 1px;
+            background: var(--border-dark);
+            align-self: stretch;
+        }
+        /* Phone mockup */
+        
+        .hero-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.8s 0.2s ease both;
+        }
+        
+        .phone-frame {
+            width: 290px;
+            height: 570px;
+            background: var(--ink-3);
+            border-radius: 44px;
+            padding: 14px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+            position: relative;
+            transform: perspective(1200px) rotateY(-8deg) rotateX(3deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .phone-frame:hover {
+            transform: perspective(1200px) rotateY(-3deg) rotateX(1deg);
+        }
+        
+        .phone-notch {
+            width: 80px;
+            height: 22px;
+            background: var(--ink-3);
+            border-radius: 0 0 16px 16px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        
+        .phone-screen {
+            background: #111316;
+            border-radius: 32px;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .phone-header {
+            background: var(--forest);
+            padding: 34px 18px 18px;
+            color: white;
+        }
+        
+        .phone-header-label {
+            font-size: 9px;
+            font-weight: 700;
+            opacity: 0.65;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+        
+        .phone-header-amount {
+            font-family: 'DM Mono', monospace;
+            font-size: 32px;
+            font-weight: 500;
+        }
+        
+        .phone-header-reason {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        
+        .phone-body {
+            padding: 16px;
+            flex: 1;
+        }
+        
+        .phone-code-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .phone-code-label {
+            font-size: 8px;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
+        }
+        
+        .phone-code-value {
+            font-family: 'DM Mono', monospace;
+            font-size: 26px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 4px;
+        }
+        
+        .phone-code-sub {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 3px;
+        }
+        
+        .phone-qr-mini {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            padding: 7px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 7px;
+            margin: 7px 0;
+        }
+        
+        .qr-c {
+            border-radius: 1px;
+            aspect-ratio: 1;
+        }
+        
+        .qr-c.on {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .phone-detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 10px;
+        }
+        
+        .phone-detail-key {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .phone-detail-val {
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .phone-pay-btn {
+            margin-top: 12px;
+            width: 100%;
+            background: var(--gold);
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .phone-pay-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .float-badge {
+            position: absolute;
+            background: var(--ink-3);
+            border: 1px solid var(--border-dark);
+            border-radius: 14px;
+            padding: 10px 14px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            white-space: nowrap;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .float-badge-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .float-badge-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .float-badge-sub {
+            font-size: 10px;
+            color: var(--text-dim);
+        }
+        
+        .badge-1 {
+            bottom: 60px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+        
+        .badge-2 {
+            top: 90px;
+            right: -44px;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+        /* ══════════════════════════════════════ RECEIVE FEATURE SECTION ══════════════════════════════════════ */
+        
+        .receive-section {
+            background: var(--ink-2);
+            padding: 100px 5vw;
+            border-top: 1px solid var(--border-dark);
+        }
+        
+        .receive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: center;
+            margin-top: 56px;
+        }
+        
+        .receive-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .receive-feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 22px;
+            border-radius: 16px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        
+        .receive-feature:hover,
+        .receive-feature.active {
+            background: var(--mist);
+            border-color: var(--border-dark);
+        }
+        
+        .receive-feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .rf-sky {
+            background: rgba(36, 144, 184, 0.12);
+        }
+        
+        .rf-green {
+            background: rgba(42, 128, 85, 0.12);
+        }
+        
+        .rf-gold {
+            background: var(--gold-pale);
+        }
+        
+        .rf-ember {
+            background: rgba(193, 68, 14, 0.12);
+        }
+        
+        .receive-feature-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .receive-feature-desc {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.65;
+        }
+        
+        .receive-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .receive-card-big {
+            background: var(--ink-3);
+            border: 1px solid var(--border-dark);
+            border-radius: 24px;
+            padding: 28px;
+        }
+        
+        .receive-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .receive-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .receive-tag-sky {
+            background: rgba(36, 144, 184, 0.12);
+            color: var(--sky-light);
+            border: 1px solid var(--border-sky);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .receive-txn-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .receive-txn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--ink-4);
+            border-radius: 10px;
+        }
+        
+        .receive-txn-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .receive-txn-desc {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .receive-txn-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .receive-txn-time {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+        
+        .receive-txn-amount {
+            font-family: 'DM Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .receive-txn-amount.pos {
+            color: var(--forest-light);
+        }
+        
+        .receive-cta-btn {
+            width: 100%;
+            padding: 14px;
+            background: rgba(36, 144, 184, 0.1);
+            border: 1px solid var(--border-sky);
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--sky-light);
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 14px;
+        }
+        
+        .receive-cta-btn:hover {
+            background: rgba(36, 144, 184, 0.18);
+        }
+        /* ══════════════════════════════════════ TICKER ══════════════════════════════════════ */
+        
+        .ticker-wrap {
+            background: var(--gold);
+            padding: 10px 0;
+            overflow: hidden;
+        }
+        
+        .ticker {
+            display: flex;
+            gap: 0;
+            animation: ticker 30s linear infinite;
+            width: max-content;
+        }
+        
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 0 28px;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            white-space: nowrap;
+        }
+        
+        .ticker-dot {
+            color: rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+        }
+        
+        @keyframes ticker {
+            from {
+                transform: translateX(0)
+            }
+            to {
+                transform: translateX(-50%)
+            }
+        }
+        /* ══════════════════════════════════════ COUNTER ══════════════════════════════════════ */
+        
+        .counter-section {
+            background: var(--ink-2);
+            padding: 64px 5vw;
+            border-top: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--border-dark);
+        }
+        
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+        }
+        
+        .counter-item {
+            padding: 32px 16px;
+            border-right: 1px solid var(--border-dark);
+        }
+        
+        .counter-item:last-child {
+            border-right: none;
+        }
+        
+        .counter-number {
+            font-family: 'DM Mono', monospace;
+            font-size: 44px;
+            font-weight: 500;
+            color: white;
+            display: block;
+            margin-bottom: 6px;
+        }
+        
+        .counter-number.gold {
+            color: var(--gold);
+        }
+        
+        .counter-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        /* ══════════════════════════════════════ HOW IT WORKS ══════════════════════════════════════ */
+        
+        .diagonal {
+            height: 80px;
+            background: var(--ink-3);
+            clip-path: polygon(0 0, 100% 40%, 100% 100%, 0% 100%);
+            margin-top: -2px;
+        }
+        
+        .diagonal-reverse {
+            height: 80px;
+            background: var(--ink);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
+            margin-bottom: -2px;
+        }
+        
+        .how-section {
+            background: var(--ink-3);
+            padding: 80px 5vw 110px;
+        }
+        
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 4vw, 56px);
+            font-weight: 700;
+            line-height: 1.08;
+            margin-bottom: 14px;
+            color: white;
+        }
+        
+        .section-sub {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--text-dim);
+            max-width: 560px;
+            margin-bottom: 52px;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+        
+        .step-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 32px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .step-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-4px);
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--ember));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .step-card:hover::before {
+            opacity: 1;
+        }
+        
+        .step-number {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step-number::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-dark);
+        }
+        
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gold-pale);
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border-gold);
+        }
+        
+        .step-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .step-desc {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+        
+        .how-demo-cta {
+            margin-top: 44px;
+            text-align: center;
+        }
+        
+        .btn-demo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 32px;
+            background: rgba(212, 137, 26, 0.1);
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        
+        .btn-demo:hover {
+            background: rgba(212, 137, 26, 0.18);
+            transform: translateY(-2px);
+        }
+        /* ══════════════════════════════════════ PARTNERS ══════════════════════════════════════ */
+        
+        .partners-bar {
+            background: var(--ink-2);
+            padding: 36px 5vw;
+            border-top: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--border-dark);
+        }
+        
+        .partners-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .partners-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .partner-item {
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        
+        .partner-item:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+        /* ══════════════════════════════════════ FEATURES ══════════════════════════════════════ */
+        
+        .features-section {
+            padding: 110px 5vw;
+            background: var(--ink);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: center;
+            margin-top: 56px;
+        }
+        
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            padding: 22px;
+            border-radius: 16px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        
+        .feature-item:hover,
+        .feature-item.active {
+            background: var(--mist);
+            border-color: var(--border-dark);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon-wrap {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .feature-icon-wrap.green {
+            background: rgba(26, 92, 58, 0.15);
+        }
+        
+        .feature-icon-wrap.amber {
+            background: rgba(212, 137, 26, 0.12);
+        }
+        
+        .feature-icon-wrap.red {
+            background: rgba(193, 68, 14, 0.12);
+        }
+        
+        .feature-icon-wrap.blue {
+            background: rgba(26, 92, 130, 0.12);
+        }
+        
+        .feature-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .feature-desc {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.65;
+        }
+        
+        .features-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .receipt-card {
+            background: var(--ink-3);
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+            width: 300px;
+            border: 1px solid var(--border-dark);
+        }
+        
+        .receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .receipt-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .receipt-badge {
+            background: rgba(42, 128, 85, 0.15);
+            color: var(--forest-light);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .receipt-badge::before {
+            content: '●';
+            font-size: 7px;
+        }
+        
+        .receipt-amount-block {
+            margin-bottom: 18px;
+        }
+        
+        .receipt-amount-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .receipt-amount {
+            font-family: 'DM Mono', monospace;
+            font-size: 34px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .receipt-amount span {
+            font-size: 16px;
+            color: var(--text-dim);
+        }
+        
+        .receipt-reason {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 3px;
+        }
+        
+        .receipt-divider {
+            border: none;
+            border-top: 1px dashed var(--border-dark);
+            margin: 16px 0;
+        }
+        
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 12px;
+        }
+        
+        .receipt-key {
+            color: var(--text-dim);
+        }
+        
+        .receipt-val {
+            font-weight: 600;
+            color: white;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+        }
+        
+        .receipt-footer {
+            margin-top: 16px;
+            background: rgba(42, 128, 85, 0.12);
+            border: 1px solid rgba(42, 128, 85, 0.2);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .receipt-footer-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--forest-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .receipt-footer-text {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+        
+        .receipt-footer-main {
+            font-size: 12px;
+            color: white;
+            font-weight: 600;
+        }
+        /* ══════════════════════════════════════ PRICING ══════════════════════════════════════ */
+        
+        .pricing-section {
+            background: var(--ink-2);
+            padding: 110px 5vw;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 56px;
+        }
+        
+        .pricing-card {
+            background: var(--ink-3);
+            border-radius: 22px;
+            padding: 32px 28px;
+            border: 1px solid var(--border-dark);
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pricing-card.featured {
+            background: linear-gradient(145deg, #1a1206, #0f0d08);
+            border-color: var(--gold);
+            transform: translateY(-12px);
+            box-shadow: 0 0 0 1px var(--border-gold), 0 24px 64px rgba(212, 137, 26, 0.15);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: translateY(-18px);
+        }
+        
+        .pricing-tag {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+        
+        .pricing-featured-tag {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 3px 9px;
+            border-radius: 100px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+        
+        .pricing-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .pricing-desc {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            line-height: 1.55;
+        }
+        
+        .pricing-price {
+            font-family: 'DM Mono', monospace;
+            font-size: 32px;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .pricing-period {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+        
+        .pricing-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+        
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 13px;
+            color: var(--text-mid);
+        }
+        
+        .pricing-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(42, 128, 85, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: var(--forest-light);
+            flex-shrink: 0;
+        }
+        
+        .pricing-card.featured .pricing-check {
+            background: var(--gold-pale);
+            color: var(--gold);
+        }
+        
+        .btn-pricing {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border-dark);
+            background: var(--mist);
+            color: var(--text-mid);
+        }
+        
+        .btn-pricing:hover {
+            background: var(--mist-2);
+            color: white;
+            border-color: var(--mist-3);
+        }
+        
+        .pricing-card.featured .btn-pricing {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: white;
+        }
+        
+        .pricing-card.featured .btn-pricing:hover {
+            background: var(--gold-light);
+        }
+        /* ══════════════════════════════════════ TESTIMONIALS ══════════════════════════════════════ */
+        
+        .testimonials-section {
+            padding: 110px 5vw;
+            background: var(--ink);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 56px;
+        }
+        
+        .testimonial-card {
+            background: var(--ink-3);
+            border-radius: 18px;
+            padding: 28px;
+            border: 1px solid var(--border-dark);
+            transition: all 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+            border-color: var(--border-gold);
+        }
+        
+        .testimonial-quote {
+            font-size: 32px;
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-mid);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .av-1 {
+            background: var(--forest);
+        }
+        
+        .av-2 {
+            background: var(--ember);
+        }
+        
+        .av-3 {
+            background: var(--gold);
+        }
+        
+        .testimonial-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .testimonial-role {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+        /* ══════════════════════════════════════ CTA ══════════════════════════════════════ */
+        
+        .cta-section {
+            background: var(--ink-3);
+            padding: 90px 5vw;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-dark);
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(212, 137, 26, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .cta-section .section-title {
+            max-width: 560px;
+            margin: 0 auto 14px;
+        }
+        
+        .cta-sub {
+            font-size: 17px;
+            color: var(--text-dim);
+            margin-bottom: 36px;
+            font-weight: 300;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 15px 32px;
+            background: linear-gradient(135deg, var(--gold), var(--ember));
+            border: none;
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(212, 137, 26, 0.3);
+        }
+        
+        .btn-cta-outline {
+            padding: 14px 32px;
+            background: transparent;
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-mid);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        
+        .btn-cta-outline:hover {
+            border-color: var(--border-gold);
+            color: var(--gold);
+        }
+        /* ══════════════════════════════════════ FOOTER ══════════════════════════════════════ */
+        
+        footer {
+            background: var(--ink-2);
+            padding: 56px 5vw 28px;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border-dark);
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 44px;
+            margin-bottom: 44px;
+        }
+        
+        .footer-brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+        
+        .footer-brand-desc {
+            font-size: 13px;
+            line-height: 1.75;
+            margin-bottom: 22px;
+            color: var(--text-dim);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 9px;
+        }
+        
+        .footer-social-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            border: 1px solid var(--border-dark);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .footer-social-btn:hover {
+            background: var(--mist);
+            color: white;
+        }
+        
+        .footer-col-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.22);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 18px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+        
+        .footer-links a {
+            font-size: 13px;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--border-dark);
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .footer-bottom-right {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-bottom-right a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        
+        .footer-bottom-right a:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        /* ══════════════════════════════════════ TOAST ══════════════════════════════════════ */
+        
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 2000;
+            background: var(--ink-3);
+            border: 1px solid var(--border-dark);
+            border-radius: 14px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            background: rgba(42, 128, 85, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .toast-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .toast-sub {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+        /* ══════════════════════════════════════ MOBILE RESPONSIVE ══════════════════════════════════════ */
+        
+        @media (max-width: 900px) {
+            /* Nav */
+            .nav-links,
+            .nav-actions {
+                display: none;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+            /* Hero */
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 100px 5vw 60px;
+                gap: 40px;
+                min-height: auto;
+            }
+            .hero-right {
+                display: none;
+            }
+            .hero-headline {
+                font-size: clamp(42px, 9vw, 60px);
+            }
+            .hero-sub {
+                font-size: 16px;
+                max-width: 100%;
+            }
+            .hero-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-large,
+            .btn-outline-large {
+                text-align: center;
+                justify-content: center;
+            }
+            .hero-stats {
+                gap: 20px;
+            }
+            /* Steps */
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            /* Features */
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .features-visual {
+                order: -1;
+            }
+            .receipt-card {
+                width: 100%;
+                max-width: 340px;
+                margin: 0 auto;
+            }
+            /* Receive */
+            .receive-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .receive-visual {
+                order: -1;
+            }
+            /* Pricing */
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.featured {
+                transform: none;
+            }
+            .pricing-card.featured:hover {
+                transform: translateY(-6px);
+            }
+            /* Testimonials */
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            /* Counter */
+            .counter-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .counter-item:nth-child(2) {
+                border-right: none;
+            }
+            .counter-item:nth-child(3) {
+                border-right: 1px solid var(--border-dark);
+                border-top: 1px solid var(--border-dark);
+            }
+            .counter-item:nth-child(4) {
+                border-right: none;
+                border-top: 1px solid var(--border-dark);
+            }
+            /* Footer */
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+            /* Demo modal phone */
+            .demo-phone {
+                width: 220px;
+            }
+            /* CTA */
+            .cta-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .cta-actions .btn-cta,
+            .cta-actions .btn-cta-outline {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            nav {
+                padding: 0 4vw;
+            }
+            .hero {
+                padding: 88px 4vw 52px;
+            }
+            .flow-wrap {
+                padding: 24px 20px 20px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .code-result-value {
+                font-size: 32px;
+                letter-spacing: 4px;
+            }
+            .how-demo-body {
+                padding: 20px;
+            }
+            .receive-method-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .counter-number {
+                font-size: 36px;
+            }
+            .section-title {
+                font-size: clamp(30px, 8vw, 44px);
+            }
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            .how-section,
+            .features-section,
+            .pricing-section,
+            .testimonials-section,
+            .cta-section,
+            .receive-section {
+                padding-top: 72px;
+                padding-bottom: 72px;
+                padding-left: 4vw;
+                padding-right: 4vw;
+            }
+            .modal-overlay {
+                padding: 10px;
+                align-items: flex-end;
+            }
+            .modal-box {
+                border-radius: 24px 24px 16px 16px;
+                max-height: 95vh;
+            }
+            .demo-phone {
+                width: 200px;
+            }
+            .demo-phone-screen {
+                min-height: 320px;
+            }
+            .badge-1,
+            .badge-2 {
+                display: none;
+            }
+            .float-badge {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .provider-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 6px;
+            }
+            .provider-btn {
+                padding: 10px 4px;
+                font-size: 10px;
+            }
+            .hero-stats {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .hero-stat-divider {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div>
+            <div class="toast-text" id="toast-text">Done!</div>
+            <div class="toast-sub" id="toast-sub"></div>
+        </div>
+    </div>
+    <!-- ══════════════════════════════════════ REQUEST MODAL ══════════════════════════════════════ -->
+    <div class="modal-overlay" id="requestModal">
+        <div class="modal-box"> <button class="modal-close" onclick="closeModal('requestModal')">×</button>
+            <div class="flow-wrap">
+                <div class="flow-steps-bar">
+                    <div class="flow-step-dot active" id="rd1"></div>
+                    <div class="flow-step-dot" id="rd2"></div>
+                    <div class="flow-step-dot" id="rd3"></div>
+                    <div class="flow-step-dot" id="rd4"></div>
+                </div>
+                <div class="flow-title" id="flow-title">Create a request</div>
+                <div class="flow-subtitle" id="flow-subtitle">Tell us what you're collecting for</div>
+                <!-- PAGE 1 -->
+                <div class="flow-page active" id="fp1">
+                    <div class="form-group"> <label class="form-label">Amount (UGX)</label>
+                        <div class="form-input-prefix-wrap"> <span class="form-input-prefix">UGX</span> <input class="form-input has-prefix" id="inp-amount" type="number" placeholder="e.g. 45,000" min="500"> </div>
+                    </div>
+                    <div class="form-group"> <label class="form-label">What is it for?</label> <input class="form-input" id="inp-reason" type="text" placeholder="e.g. Lunch at Café Javas"> </div>
+                    <div class="form-group"> <label class="form-label">Your name / business</label> <input class="form-input" id="inp-name" type="text" placeholder="e.g. Namutebi Crafts"> </div> <button class="btn-flow-next" onclick="flowNext(1)">Continue →</button> </div>
+                <!-- PAGE 2 -->
+                <div class="flow-page" id="fp2">
+                    <div class="form-group"> <label class="form-label">Expiry</label> <select class="form-input" id="inp-expiry" style="cursor:pointer"> <option value="24">24 hours</option> <option value="48">48 hours</option> <option value="72">72 hours</option> <option value="168">1 week</option> <option value="0">No expiry</option> </select>                        </div>
+                    <div class="form-group"> <label class="form-label">Allow partial payment?</label> <select class="form-input" id="inp-partial" style="cursor:pointer"> <option value="no">No — full amount only</option> <option value="yes">Yes — any amount</option> </select>                        </div>
+                    <div class="form-group"> <label class="form-label">Accepted providers</label>
+                        <div class="provider-grid"> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="mtn"><span class="provider-emoji">📱</span>MTN MoMo</button> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="airtel"><span class="provider-emoji">📲</span>Airtel</button>                            <button class="provider-btn" onclick="toggleProvider(this)" data-v="stanbic"><span class="provider-emoji">🏦</span>Stanbic</button> </div>
+                    </div> <button class="btn-flow-next" onclick="flowNext(2)">Generate my code →</button> <button class="btn-flow-back" onclick="flowBack(2)">← Back</button> </div>
+                <!-- PAGE 3 -->
+                <div class="flow-page" id="fp3">
+                    <div class="code-result-box">
+                        <div class="code-result-label">Your payment code</div>
+                        <div class="code-result-value" id="gen-code">KLA·0000</div>
+                        <div class="code-result-sub" id="gen-expiry-label">Expires in 24 hours</div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')">💬 WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')">📱 SMS</button> <button class="code-share-btn" onclick="shareCode('copy')">📋 Copy</button>                            </div>
+                    </div>
+                    <div class="payment-summary" id="gen-summary"></div> <button class="btn-flow-next" onclick="flowNext(3)">✓ Done — view receipt</button> </div>
+                <!-- PAGE 4 -->
+                <div class="flow-page" id="fp4" style="text-align:center;padding:16px 0 8px">
+                    <div class="success-ring">✓</div>
+                    <div class="flow-title" style="margin-bottom:6px">Request created!</div>
+                    <div class="flow-subtitle" style="margin-bottom:22px">Your payment code is live and ready to share.</div>
+                    <div class="code-result-box" style="margin-bottom:14px">
+                        <div class="code-result-label">Active code</div>
+                        <div class="code-result-value" id="final-code">KLA·0000</div>
+                        <div class="code-result-sub" id="final-amount-label">Awaiting payment</div>
+                    </div> <button class="btn-flow-next" onclick="closeModal('requestModal')">Close</button> </div>
+            </div>
+        </div>
+    </div>
+    <!-- ══════════════════════════════════════ RECEIVE PAYMENTS MODAL ══════════════════════════════════════ -->
+    <div class="modal-overlay" id="receiveModal">
+        <div class="modal-box" style="max-width:580px"> <button class="modal-close" onclick="closeModal('receiveModal')">×</button>
+            <div class="flow-wrap">
+                <!-- Tab nav -->
+                <div style="display:flex;gap:6px;margin-bottom:26px;background:var(--ink-4);border-radius:12px;padding:5px"> <button class="receive-tab-btn active" id="rtab-wallet" onclick="switchReceiveTab('wallet')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:var(--ink-3);color:white;transition:all 0.2s">💳 My Wallet</button>                    <button class="receive-tab-btn" id="rtab-methods" onclick="switchReceiveTab('methods')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--text-dim);transition:all 0.2s">📥 How to receive</button>                    <button class="receive-tab-btn" id="rtab-history" onclick="switchReceiveTab('history')" style="flex:1;padding:9px;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--text-dim);transition:all 0.2s">📋 History</button>                    </div>
+                <!-- WALLET TAB -->
+                <div class="receive-panel active" id="rpanel-wallet">
+                    <div class="balance-card">
+                        <div class="balance-label">Total received this month</div>
+                        <div class="balance-amount">UGX 184,500</div>
+                        <div class="balance-sub">From 7 transactions · Updated just now</div>
+                        <div class="balance-grid">
+                            <div class="balance-mini">
+                                <div class="balance-mini-label">Pending</div>
+                                <div class="balance-mini-val">UGX 45,000</div>
+                            </div>
+                            <div class="balance-mini">
+                                <div class="balance-mini-label">Settled today</div>
+                                <div class="balance-mini-val">UGX 139,500</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Withdraw panel (collapsible) -->
+                    <div id="withdraw-panel" style="display:none;margin-bottom:16px">
+                        <div class="flow-title" style="font-size:22px;margin-bottom:4px">Withdraw funds</div>
+                        <div class="flow-subtitle" style="margin-bottom:18px">Choose where to send your balance</div>
+                        <div class="withdraw-options">
+                            <div class="withdraw-option selected" onclick="selectWithdraw(this)">
+                                <div class="withdraw-option-icon">📱</div>
+                                <div class="withdraw-option-text">
+                                    <div class="withdraw-option-title">MTN Mobile Money</div>
+                                    <div class="withdraw-option-sub">Instant · 0% fee</div>
+                                </div>
+                                <div class="withdraw-option-check">✓</div>
+                            </div>
+                            <div class="withdraw-option" onclick="selectWithdraw(this)">
+                                <div class="withdraw-option-icon">📲</div>
+                                <div class="withdraw-option-text">
+                                    <div class="withdraw-option-title">Airtel Money</div>
+                                    <div class="withdraw-option-sub">Instant · 0% fee</div>
+                                </div>
+                                <div class="withdraw-option-check"></div>
+                            </div>
+                            <div class="withdraw-option" onclick="selectWithdraw(this)">
+                                <div class="withdraw-option-icon">🏦</div>
+                                <div class="withdraw-option-text">
+                                    <div class="withdraw-option-title">Bank transfer (Stanbic)</div>
+                                    <div class="withdraw-option-sub">1–2 hours · Free</div>
+                                </div>
+                                <div class="withdraw-option-check"></div>
+                            </div>
+                        </div>
+                        <div class="form-group"> <label class="form-label">Amount to withdraw</label>
+                            <div class="form-input-prefix-wrap"> <span class="form-input-prefix">UGX</span> <input class="form-input has-prefix" type="number" placeholder="e.g. 100,000" id="withdraw-amount"> </div>
+                        </div>
+                        <div class="form-group"> <label class="form-label">Phone / account number</label> <input class="form-input" type="tel" placeholder="e.g. 0771234567" id="withdraw-phone"> </div> <button class="btn-flow-next" onclick="submitWithdraw()" style="background:linear-gradient(135deg,var(--forest),var(--forest-light))">Withdraw funds →</button>                        <button class="btn-flow-back" onclick="document.getElementById('withdraw-panel').style.display='none';document.getElementById('wallet-main').style.display='block'">← Back to wallet</button> </div>
+                    <div id="wallet-main">
+                        <div style="font-size:12px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Recent payments</div>
+                        <div class="pending-list">
+                            <div class="pending-item">
+                                <div class="pending-icon paid">✓</div>
+                                <div class="pending-info">
+                                    <div class="pending-reason">Lunch at Café Javas</div>
+                                    <div class="pending-meta">MTN MoMo · 12:51 PM</div>
+                                </div>
+                                <div class="pending-amount">
+                                    <div class="pending-amount-val">+45,000</div>
+                                    <div class="pending-status paid">Paid</div>
+                                </div>
+                            </div>
+                            <div class="pending-item">
+                                <div class="pending-icon paid">✓</div>
+                                <div class="pending-info">
+                                    <div class="pending-reason">October rent – Unit 3B</div>
+                                    <div class="pending-meta">Airtel Money · 10:02 AM</div>
+                                </div>
+                                <div class="pending-amount">
+                                    <div class="pending-amount-val">+450,000</div>
+                                    <div class="pending-status paid">Paid</div>
+                                </div>
+                            </div>
+                            <div class="pending-item">
+                                <div class="pending-icon waiting">⏳</div>
+                                <div class="pending-info">
+                                    <div class="pending-reason">School term fees – Grade 4</div>
+                                    <div class="pending-meta">KLA·8831 · Expires in 2h</div>
+                                </div>
+                                <div class="pending-amount">
+                                    <div class="pending-amount-val">250,000</div>
+                                    <div class="pending-status waiting">Waiting</div>
+                                </div>
+                            </div>
+                            <div class="pending-item">
+                                <div class="pending-icon partial">◑</div>
+                                <div class="pending-info">
+                                    <div class="pending-reason">Group dinner split</div>
+                                    <div class="pending-meta">Partially paid · 3 of 5</div>
+                                </div>
+                                <div class="pending-amount">
+                                    <div class="pending-amount-val">45,000</div>
+                                    <div class="pending-status partial">Partial</div>
+                                </div>
+                            </div>
+                        </div> <button class="btn-flow-next" onclick="document.getElementById('wallet-main').style.display='none';document.getElementById('withdraw-panel').style.display='block'" style="background:linear-gradient(135deg,var(--forest),var(--forest-light));margin-top:4px">Withdraw balance →</button>                        </div>
+                </div>
+                <!-- METHODS TAB -->
+                <div class="receive-panel" id="rpanel-methods" style="display:none">
+                    <div class="receive-header-tag">⬇ Receive money</div>
+                    <div class="flow-title" style="font-size:24px;margin-bottom:4px">How do you want to be paid?</div>
+                    <div class="flow-subtitle" style="margin-bottom:20px">Pick a method and share it with your payer</div>
+                    <div class="form-group"> <label class="form-label">Choose method</label>
+                        <div class="receive-method-grid"> <button class="receive-method-btn selected" id="rm-code" onclick="selectReceiveMethod('code')"> <span class="method-emoji">🔢</span> Payment Code <small>Human-readable · Works offline</small> </button> <button class="receive-method-btn"
+                                id="rm-link" onclick="selectReceiveMethod('link')"> <span class="method-emoji">🔗</span> Payment Link <small>Share a URL · Mobile-friendly</small> </button> <button class="receive-method-btn" id="rm-qr" onclick="selectReceiveMethod('qr')"> <span class="method-emoji">📷</span> QR Code <small>Scan to pay · Print-ready</small> </button>                            <button class="receive-method-btn" id="rm-bank" onclick="selectReceiveMethod('bank')"> <span class="method-emoji">🏦</span> Bank Details <small>Account number · SWIFT</small> </button> </div>
+                    </div>
+                    <!-- Code method content -->
+                    <div id="rm-content-code">
+                        <div class="code-result-box" style="border-color:var(--border-sky)">
+                            <div class="code-result-label" style="color:var(--sky-light)">Your receive code</div>
+                            <div class="code-result-value" style="font-size:36px">KLA·7741</div>
+                            <div class="code-result-sub">Share this code — payer enters it at sasula.ug</div>
+                        </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)">💬 WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)">📱 SMS</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)">📋 Copy</button> </div>
+                    </div>
+                    <!-- Link method content -->
+                    <div id="rm-content-link" style="display:none">
+                        <div class="link-display"> <span class="link-text">sasula.ug/pay/kla-7741</span> <button class="link-copy-btn" onclick="showToast('Link copied!','sasula.ug/pay/kla-7741')">Copy</button> </div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px">Payer opens link, sees your request, and pays with their preferred Mobile Money provider — no app needed.</div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)">💬 WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)">📧 Email</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)">🔗 Copy</button> </div>
+                    </div>
+                    <!-- QR method content -->
+                    <div id="rm-content-qr" style="display:none">
+                        <div class="qr-display">
+                            <div class="qr-mock-wrap">
+                                <div class="qr-mock-grid">
+                                    <!-- Simulated QR pattern -->
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm w"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                    <div class="qm b"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align:center;font-size:12px;color:var(--text-dim);margin-bottom:12px">Print this QR and put it at your till, table, or entrance</div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="showToast('Downloading QR…','Saving as PNG')" style="border-color:var(--border-sky)">⬇ Download PNG</button> <button class="code-share-btn" onclick="showToast('Opening print…','')" style="border-color:var(--border-sky)">🖨 Print</button>                            <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)">💬 Share</button> </div>
+                    </div>
+                    <!-- Bank method content -->
+                    <div id="rm-content-bank" style="display:none">
+                        <div class="bank-details-card">
+                            <div class="bank-detail-row"> <span class="bank-detail-key">Account name</span> <span class="bank-detail-val">Sasula Uganda Ltd <button class="copy-mini" onclick="showToast('Copied!','Account name')">Copy</button></span> </div>
+                            <div class="bank-detail-row">
+                            <span class="bank-detail-key">Bank</span> <span class="bank-detail-val">Stanbic Bank Uganda</span> </div>
+                            <div class="bank-detail-row"> <span class="bank-detail-key">Account no.</span> <span class="bank-detail-val">9030014782 <button class="copy-mini" onclick="showToast('Copied!','9030014782')">Copy</button></span> </div>
+                            <div class="bank-detail-row"> <span class="bank-detail-key">Branch</span> <span class="bank-detail-val">Kampala Main</span> </div>
+                            <div class="bank-detail-row"> <span class="bank-detail-key">SWIFT / BIC</span> <span class="bank-detail-val">SBICUGKX <button class="copy-mini" onclick="showToast('Copied!','SBICUGKX')">Copy</button></span> </div>
+                        </div>
+                        <div style="font-size:12px;color:var(--text-dim)">Send these details to your payer. Every bank transfer auto-reconciles against your Sasula account.</div>
+                    </div>
+                </div>
+                <!-- HISTORY TAB -->
+                <div class="receive-panel" id="rpanel-history" style="display:none">
+                    <div class="flow-title" style="font-size:24px;margin-bottom:4px">Payment history</div>
+                    <div class="flow-subtitle" style="margin-bottom:20px">All payments received this month</div>
+                    <div class="pending-list">
+                        <div class="pending-item">
+                            <div class="pending-icon paid">✓</div>
+                            <div class="pending-info">
+                                <div class="pending-reason">Lunch at Café Javas</div>
+                                <div class="pending-meta">Today · 12:51 PM · KLA-4829 · MTN MoMo</div>
+                            </div>
+                            <div class="pending-amount">
+                                <div class="pending-amount-val" style="color:var(--forest-light)">+45,000</div>
+                                <div class="pending-status paid">Settled</div>
+                            </div>
+                        </div>
+                        <div class="pending-item">
+                            <div class="pending-icon paid">✓</div>
+                            <div class="pending-info">
+                                <div class="pending-reason">October rent – Unit 3B</div>
+                                <div class="pending-meta">Today · 10:02 AM · ENT-9904 · Airtel</div>
+                            </div>
+                            <div class="pending-amount">
+                                <div class="pending-amount-val" style="color:var(--forest-light)">+450,000</div>
+                                <div class="pending-status paid">Settled</div>
+                            </div>
+                        </div>
+                        <div class="pending-item">
+                            <div class="pending-icon paid">✓</div>
+                            <div class="pending-info">
+                                <div class="pending-reason">Salon services – Nakato</div>
+                                <div class="pending-meta">Yesterday · 3:20 PM · KLA-3344 · MTN MoMo</div>
+                            </div>
+                            <div class="pending-amount">
+                                <div class="pending-amount-val" style="color:var(--forest-light)">+85,000</div>
+                                <div class="pending-status paid">Settled</div>
+                            </div>
+                        </div>
+                        <div class="pending-item">
+                            <div class="pending-icon waiting">⏳</div>
+                            <div class="pending-info">
+                                <div class="pending-reason">School term fees – Grade 4</div>
+                                <div class="pending-meta">Issued today · KLA-8831 · Expires 6 PM</div>
+                            </div>
+                            <div class="pending-amount">
+                                <div class="pending-amount-val">250,000</div>
+                                <div class="pending-status waiting">Pending</div>
+                            </div>
+                        </div>
+                        <div class="pending-item">
+                            <div class="pending-icon partial">◑</div>
+                            <div class="pending-info">
+                                <div class="pending-reason">Group dinner split</div>
+                                <div class="pending-meta">3 of 5 paid · GUL-2201 · MTN MoMo</div>
+                            </div>
+                            <div class="pending-amount">
+                                <div class="pending-amount-val">90,000</div>
+                                <div class="pending-status partial">Partial</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align:center;padding:8px 0"> <button style="background:none;border:none;color:var(--gold);font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif" onclick="showToast('Loading more…','')">Load older transactions ↓</button> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ══════════════════════════════════════ HOW IT WORKS DEMO MODAL ══════════════════════════════════════ -->
+    <div class="modal-overlay" id="howModal">
+        <div class="modal-box" style="max-width:580px"> <button class="modal-close" onclick="closeModal('howModal')">×</button>
+            <div class="how-demo">
+                <div class="how-demo-nav">
+                    <div class="how-demo-tab active" onclick="switchTab('merchant')">As the merchant</div>
+                    <div class="how-demo-tab" onclick="switchTab('payer')">As the payer</div>
+                </div>
+                <div class="how-demo-body">
+                    <!-- Merchant view -->
+                    <div class="how-demo-panel active" id="tab-merchant">
+                        <div class="demo-step-indicators" id="merchant-inds">
+                            <div class="demo-step-ind active"></div>
+                            <div class="demo-step-ind"></div>
+                            <div class="demo-step-ind"></div>
+                        </div>
+                        <div class="flow-page active" id="ms1">
+                            <div class="demo-phone-wrap">
+                                <div class="demo-phone">
+                                    <div class="demo-phone-screen">
+                                        <div style="padding:20px 14px;background:var(--ink-4)">
+                                            <div style="font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px">New payment request</div>
+                                            <div style="margin-bottom:10px">
+                                                <div style="font-size:9px;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:1px">Amount</div>
+                                                <div style="background:var(--steel);border-radius:7px;padding:10px;font-family:'DM Mono',monospace;font-size:20px;color:white">UGX 45,000</div>
+                                            </div>
+                                            <div style="margin-bottom:10px">
+                                                <div style="font-size:9px;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:1px">Reason</div>
+                                                <div style="background:var(--steel);border-radius:7px;padding:10px;font-size:12px;color:white">Lunch at Café Javas</div>
+                                            </div>
+                                            <div style="background:linear-gradient(135deg,var(--gold),var(--ember));border-radius:8px;padding:11px;text-align:center;font-size:12px;font-weight:700;color:white;margin-top:14px">Generate Code →</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="demo-caption">Step 1: Fill in amount and reason. That's all it takes.</p>
+                            <div class="demo-nav-row"><button class="demo-btn-next" onclick="merchantStep(2)">Next →</button></div>
+                        </div>
+                        <div class="flow-page" id="ms2">
+                            <div class="demo-phone-wrap">
+                                <div class="demo-phone">
+                                    <div class="demo-phone-screen">
+                                        <div class="demo-phone-bar">
+                                            <div class="demo-phone-bar-label">Payment request</div>
+                                            <div class="demo-phone-bar-amount">UGX 45,000</div>
+                                            <div class="demo-phone-bar-reason">Lunch at Café Javas</div>
+                                        </div>
+                                        <div class="demo-phone-body">
+                                            <div class="demo-code-block">
+                                                <div class="demo-code-label">Your payment code</div>
+                                                <div class="demo-code-val">KLA·4829</div>
+                                            </div>
+                                            <div style="display:flex;gap:6px;margin-top:8px">
+                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">💬</div>
+                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">📋</div>
+                                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:7px;padding:8px;text-align:center;font-size:10px;color:var(--text-dim)">📱</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="demo-caption">Step 2: Code <strong style="color:var(--gold)">KLA·4829</strong> is generated. Share via WhatsApp, SMS, or show your screen.</p>
+                            <div class="demo-nav-row"> <button class="demo-btn-prev" onclick="merchantStep(1)">← Back</button> <button class="demo-btn-next" onclick="merchantStep(3)">See payment →</button> </div>
+                        </div>
+                        <div class="flow-page" id="ms3">
+                            <div class="demo-phone-wrap">
+                                <div class="demo-phone">
+                                    <div class="demo-phone-screen">
+                                        <div style="padding:18px 14px">
+                                            <div style="font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px">✓ Payment received</div>
+                                            <div style="background:rgba(42,128,85,0.12);border:1px solid rgba(42,128,85,0.25);border-radius:10px;padding:14px;margin-bottom:10px;text-align:center">
+                                                <div style="font-size:9px;color:var(--forest-light);margin-bottom:3px">AMOUNT RECEIVED</div>
+                                                <div style="font-family:'DM Mono',monospace;font-size:26px;color:white">UGX 45,000</div>
+                                            </div>
+                                            <div class="demo-detail"><span class="demo-detail-k">From</span><span class="demo-detail-v">07XX-XXX-XXX</span></div>
+                                            <div class="demo-detail"><span class="demo-detail-k">Via</span><span class="demo-detail-v">MTN MoMo</span></div>
+                                            <div class="demo-detail" style="border:none"><span class="demo-detail-k">Ref</span><span class="demo-detail-v">SS-7X9K</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="demo-caption">Step 3: Instant notification with structured receipt — amount, payer, provider, reference.</p>
+                            <div class="demo-nav-row"> <button class="demo-btn-prev" onclick="merchantStep(2)">← Back</button> <button class="demo-btn-next" onclick="closeModal('howModal');openModal('requestModal')">Try it →</button> </div>
+                        </div>
+                    </div>
+                    <!-- Payer view -->
+                    <div class="how-demo-panel" id="tab-payer">
+                        <div class="demo-step-indicators" id="payer-inds">
+                            <div class="demo-step-ind active"></div>
+                            <div class="demo-step-ind"></div>
+                            <div class="demo-step-ind"></div>
+                        </div>
+                        <div class="flow-page active" id="ps1">
+                            <div class="demo-phone-wrap">
+                                <div class="demo-phone">
+                                    <div class="demo-phone-screen">
+                                        <div style="padding:18px 14px;background:var(--ink-4)">
+                                            <div style="font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px">Enter payment code</div>
+                                            <div style="background:var(--steel);border-radius:10px;padding:14px;text-align:center;margin-bottom:14px">
+                                                <div style="font-family:'DM Mono',monospace;font-size:28px;color:white;letter-spacing:5px">KLA·4829</div>
+                                            </div>
+                                            <div style="font-size:10px;color:var(--text-dim);text-align:center;margin-bottom:14px">or scan a QR code</div>
+                                            <div style="background:linear-gradient(135deg,var(--gold),var(--ember));border-radius:8px;padding:11px;text-align:center;font-size:12px;font-weight:700;color:white">Look up code →</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="demo-caption">Enter a code from WhatsApp, SMS, or a sign. No account needed.</p>
+                            <div class="demo-nav-row"><button class="demo-btn-next" onclick="payerStep(2)">See details →</button></div>
+                        </div>
+                        <div class="flow-page" id="ps2">
+                            <div class="demo-phone-wrap">
+                                <div class="demo-phone">
+                                    <div class="demo-phone-screen">
+                                        <div class="demo-phone-bar">
+                                            <div class="demo-phone-bar-label">You're paying</div>
+                                            <div class="demo-phone-bar-amount">UGX 45,000</div>
+                                            <div class="demo-phone-bar-reason">Café Javas · KLA·4829</div>
+                                        </div>
+                                        <div class="demo-phone-body">
+                                            <div style="font-size:9px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px">Choose provider</div>
+                                            <div style="display:flex;flex-direction:column;gap:6px">
+                                                <div style="background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.25);border-radius:8px;padding:10px;font-size:11px;color:white;display:flex;align-items:center;gap:7px">📱 MTN Mobile Money</div>
+                                                <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-dark);border-radius:8px;padding:10px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:7px">📲 Airtel Money</div>
+                                                <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-dark);border-radius:8px;padding:10px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:7px">🏦 Stanbic Bank</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="demo-caption">Full context shown — who, how much, why. Pick your provider and pay.</p>
+                            <div class="demo-nav-row"> <button class="demo-btn-prev" onclick="payerStep(1)">← Back</button> <button class="demo-btn-next" onclick="payerStep(3)">Pay →</button> </div>
+                        </div>
+                        <div class="flow-page" id="ps3">
+                            <div class="demo-phone-wrap">
+                                <div class="demo-phone">
+                                    <div class="demo-phone-screen">
+                                        <div style="padding:18px 14px;text-align:center">
+                                            <div style="width:52px;height:52px;border-radius:50%;background:rgba(42,128,85,0.2);border:2px solid var(--forest-light);display:flex;align-items:center;justify-content:center;font-size:22px;margin:14px auto">✓</div>
+                                            <div style="font-size:14px;font-weight:700;color:white;margin-bottom:3px">Payment sent!</div>
+                                            <div style="font-size:11px;color:var(--text-dim);margin-bottom:14px">Both parties notified</div>
+                                            <div class="demo-detail"><span class="demo-detail-k">Amount</span><span class="demo-detail-v">UGX 45,000</span></div>
+                                            <div class="demo-detail"><span class="demo-detail-k">To</span><span class="demo-detail-v">Café Javas</span></div>
+                                            <div class="demo-detail" style="border:none"><span class="demo-detail-k">TXN</span><span class="demo-detail-v" style="font-size:10px">SS-2026-7X9K</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="demo-caption">Done. Both sides get a receipt instantly. Under 60 seconds total.</p>
+                            <div class="demo-nav-row"> <button class="demo-btn-prev" onclick="payerStep(2)">← Back</button> <button class="demo-btn-next" onclick="closeModal('howModal');openModal('requestModal')">Try it →</button> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ══════════════════════════════════════ NAV ══════════════════════════════════════ -->
+    <nav id="main-nav">
+        <a href="#" class="nav-logo"> <svg class="nav-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"> <defs> <linearGradient id="lgNav" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"> <stop offset="0%" stop-color="#D4891A"/><stop offset="100%" stop-color="#C1440E"/> </linearGradient> </defs> <rect width="40" height="40" rx="11" fill="url(#lgNav)"/> <path d="M8 24 Q14 10 20 20 Q26 30 32 16" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/> <path d="M14 17 Q18 12 24 13" stroke="rgba(255,255,255,0.65)" stroke-width="1.8" stroke-linecap="round" fill="none"/> <path d="M28.5 16 L32 16 L30.5 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/> <circle cx="8" cy="28" r="2" fill="rgba(255,255,255,0.5)"/> <circle cx="32" cy="28" r="2" fill="rgba(255,255,255,0.5)"/> <circle cx="20" cy="31" r="2" fill="rgba(255,255,255,0.5)"/> </svg>            <span class="nav-logo-text">Sa<span>sula</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#receive">Receive</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+        </ul>
+        <div class="nav-actions"> <a href="#" class="btn-ghost">Sign in</a> <button class="btn-primary" onclick="openModal('receiveModal')"> Receive payments <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>            </div> <button class="nav-hamburger" id="nav-ham" onclick="toggleMobileMenu()"> <span></span><span></span><span></span> </button> </nav>
+    <!-- Mobile Menu -->
+    <div class="nav-mobile-menu" id="nav-mobile"> <a class="nav-mobile-link" href="#how" onclick="toggleMobileMenu()">How it works</a> <a class="nav-mobile-link" href="#receive" onclick="toggleMobileMenu()">Receive payments</a> <a class="nav-mobile-link" href="#features" onclick="toggleMobileMenu()">Features</a>        <a class="nav-mobile-link" href="#pricing" onclick="toggleMobileMenu()">Pricing</a> <a class="nav-mobile-link" href="#testimonials" onclick="toggleMobileMenu()">Stories</a>
+        <div class="nav-mobile-actions"> <a href="#" class="btn-ghost">Sign in</a> <button class="btn-primary" onclick="toggleMobileMenu();openModal('receiveModal')">Receive →</button> </div>
+    </div>
+    <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-left">
+            <div class="hero-tag">
+                <div class="hero-tag-dot"></div> Built in Uganda · For East Africa </div>
+            <h1 class="hero-headline"> Money moves<br> <em>with purpose</em><br> in Uganda </h1>
+            <p class="hero-sub"> <strong>Sasula</strong> is the payment request layer that every Mobile Money network was missing. Create a code, share it anywhere, get paid — with full context attached. </p>
+            <div class="hero-cta-row"> <button class="btn-large" onclick="openModal('requestModal')"> Start requesting <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-large sky-btn" onclick="openModal('receiveModal')"> Receive payments <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-outline-large" onclick="openModal('howModal')">▶ How it works</button> </div>
+            <div class="hero-stats">
+                <div class="hero-stat"> <span class="hero-stat-num" id="txn-count">4,218</span> <span class="hero-stat-label">Live transactions</span> </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat"> <span class="hero-stat-num">47s</span> <span class="hero-stat-label">Avg. pay time</span> </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat"> <span class="hero-stat-num">3</span> <span class="hero-stat-label">MoMo providers</span> </div>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="float-badge badge-1">
+                <div class="float-badge-icon" style="background:rgba(42,128,85,0.15)">✓</div>
+                <div>
+                    <div class="float-badge-text">Payment confirmed</div>
+                    <div class="float-badge-sub">UGX 45,000 · KLA-4829</div>
+                </div>
+            </div>
+            <div class="float-badge badge-2">
+                <div class="float-badge-icon" style="background:rgba(212,137,26,0.12)">📱</div>
+                <div>
+                    <div class="float-badge-text">Via MTN MoMo</div>
+                    <div class="float-badge-sub">Just now · Ref: SS-7X9K</div>
+                </div>
+            </div>
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="phone-header">
+                        <div class="phone-header-label">Payment request · Sasula</div>
+                        <div class="phone-header-amount">UGX 45,000</div>
+                        <div class="phone-header-reason">Lunch at Café Javas, Acacia</div>
+                    </div>
+                    <div class="phone-body">
+                        <div class="phone-code-block">
+                            <div class="phone-code-label">Your payment code</div>
+                            <div class="phone-code-value">KLA·4829</div>
+                            <div class="phone-qr-mini">
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c"></div>
+                                <div class="qr-c on"></div>
+                                <div class="qr-c"></div>
+                            </div>
+                            <div class="phone-code-sub">Expires in 47 minutes</div>
+                        </div>
+                        <div class="phone-detail-row"><span class="phone-detail-key">Requested by</span><span class="phone-detail-val">Café Javas</span></div>
+                        <div class="phone-detail-row"><span class="phone-detail-key">Status</span><span class="phone-detail-val" style="color:var(--gold)">Awaiting payment</span></div> <button class="phone-pay-btn"><span class="phone-pay-dot"></span> Pay via Mobile Money</button>                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">MTN MoMo <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Airtel Money <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Stanbic Bank <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Kampala <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Gulu <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Mbarara <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Jinja <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Sasula · Cashless Uganda <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">MTN MoMo <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Airtel Money <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Stanbic Bank <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Kampala <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Gulu <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Mbarara <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Jinja <span class="ticker-dot">·</span></div>
+            <div class="ticker-item">Sasula · Cashless Uganda <span class="ticker-dot">·</span></div>
+        </div>
+    </div>
+    <!-- COUNTER -->
+    <div class="counter-section">
+        <div class="counter-grid">
+            <div class="counter-item"><span class="counter-number gold" data-target="14823">0</span><span class="counter-label">Requests created</span></div>
+            <div class="counter-item"><span class="counter-number" data-target="11490">0</span><span class="counter-label">Payments completed</span></div>
+            <div class="counter-item"><span class="counter-number gold" data-target="98">0</span><span class="counter-label">% uptime</span></div>
+            <div class="counter-item"><span class="counter-number" data-target="47">0</span><span class="counter-label">Avg seconds to pay</span></div>
+        </div>
+    </div>
+    <!-- HOW IT WORKS -->
+    <div class="diagonal"></div>
+    <section class="how-section" id="how">
+        <div class="section-label">How it works</div>
+        <h2 class="section-title">Three steps.<br>One seamless flow.</h2>
+        <p class="section-sub">Sasula separates the request from the payment — so anyone can pay you, using any Mobile Money provider, with full context attached.</p>
+        <div class="steps-grid">
+            <div class="step-card" onclick="openModal('requestModal')">
+                <div class="step-number">STEP 01</div>
+                <div class="step-icon">✏️</div>
+                <div class="step-title">Create your request</div>
+                <div class="step-desc">Enter the amount, a clear reason, your name or business, and an optional expiry. Tap to try it now.</div>
+            </div>
+            <div class="step-card" onclick="openModal('howModal')">
+                <div class="step-number">STEP 02</div>
+                <div class="step-icon">📤</div>
+                <div class="step-title">Share a code or QR</div>
+                <div class="step-desc">Get a code like <strong style="color:var(--gold)">KLA-4829</strong> and a QR. Share via WhatsApp, SMS, print it, write it on a board — works everywhere.</div>
+            </div>
+            <div class="step-card" onclick="openModal('receiveModal')">
+                <div class="step-number">STEP 03</div>
+                <div class="step-icon">💸</div>
+                <div class="step-title">Payer pays their way</div>
+                <div class="step-desc">The payer picks MTN, Airtel, or Stanbic and pays. Both get a receipt instantly. Track everything in Receive Payments.</div>
+            </div>
+        </div>
+        <div class="how-demo-cta"> <button class="btn-demo" onclick="openModal('howModal')"><span>▶</span> Interactive walkthrough</button> </div>
+    </section>
+    <div class="diagonal-reverse" style="background:var(--ink-3);height:80px;clip-path:polygon(0 0, 100% 0, 100% 100%, 0 60%)"></div>
+    <!-- PARTNERS -->
+    <div class="partners-bar">
+        <div class="partners-label">Works with your favourite providers</div>
+        <div class="partners-list"> <span class="partner-item">MTN MOMO</span> <span class="partner-item">AIRTEL MONEY</span> <span class="partner-item">STANBIC BANK</span> <span class="partner-item">AFRICA'S TALKING</span> <span class="partner-item">NYLON PAY</span> </div>
+    </div>
+    <!-- RECEIVE PAYMENTS FEATURE SECTION -->
+    <section class="receive-section" id="receive">
+        <div class="section-label">Receive payments</div>
+        <h2 class="section-title">Your money,<br><em>always accounted for</em></h2>
+        <p class="section-sub">Sasula doesn't just send requests — it gives you a full receive-side dashboard. Track incoming payments, manage your balance, and withdraw in seconds.</p>
+        <div class="receive-grid">
+            <div class="receive-features">
+                <div class="receive-feature active">
+                    <div class="receive-feature-icon rf-sky">📊</div>
+                    <div>
+                        <div class="receive-feature-title">Live payment dashboard</div>
+                        <div class="receive-feature-desc">See every incoming payment in real time — amount, payer, provider, and timestamp. Your receive inbox, always current.</div>
+                    </div>
+                </div>
+                <div class="receive-feature">
+                    <div class="receive-feature-icon rf-green">💰</div>
+                    <div>
+                        <div class="receive-feature-title">Instant withdrawals</div>
+                        <div class="receive-feature-desc">Move your balance to MTN MoMo, Airtel Money, or your Stanbic account with one tap. Zero processing fee.</div>
+                    </div>
+                </div>
+                <div class="receive-feature">
+                    <div class="receive-feature-icon rf-gold">🔗</div>
+                    <div>
+                        <div class="receive-feature-title">Permanent receive link</div>
+                        <div class="receive-feature-desc">Your Sasula link never expires. Share it once, collect forever — on WhatsApp bio, email signature, or business cards.</div>
+                    </div>
+                </div>
+                <div class="receive-feature">
+                    <div class="receive-feature-icon rf-ember">🏦</div>
+                    <div>
+                        <div class="receive-feature-title">Bank & MoMo reconciliation</div>
+                        <div class="receive-feature-desc">Every payment is matched against your account automatically. Tax time is no longer a nightmare.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="receive-visual">
+                <div class="receive-card-big">
+                    <div class="receive-card-header">
+                        <div class="receive-card-title">Incoming payments</div>
+                        <div class="receive-tag-sky">Live</div>
+                    </div>
+                    <div style="margin-bottom:16px">
+                        <div class="balance-label" style="font-size:10px;margin-bottom:4px">This month</div>
+                        <div style="font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:white">UGX 184,500</div>
+                        <div style="font-size:12px;color:var(--forest-light);margin-top:2px">↑ +34% from last month</div>
+                    </div>
+                    <div class="receive-txn-list">
+                        <div class="receive-txn">
+                            <div class="receive-txn-dot" style="background:var(--forest-light)"></div>
+                            <div class="receive-txn-desc">
+                                <div class="receive-txn-name">Amina Tendo</div>
+                                <div class="receive-txn-time">Today · 12:51 PM · MTN MoMo</div>
+                            </div>
+                            <div class="receive-txn-amount pos">+45,000</div>
+                        </div>
+                        <div class="receive-txn">
+                            <div class="receive-txn-dot" style="background:var(--forest-light)"></div>
+                            <div class="receive-txn-desc">
+                                <div class="receive-txn-name">James Okullo</div>
+                                <div class="receive-txn-time">Today · 10:02 AM · Airtel Money</div>
+                            </div>
+                            <div class="receive-txn-amount pos">+450,000</div>
+                        </div>
+                        <div class="receive-txn">
+                            <div class="receive-txn-dot" style="background:var(--gold)"></div>
+                            <div class="receive-txn-desc">
+                                <div class="receive-txn-name">School term fees</div>
+                                <div class="receive-txn-time">Pending · KLA-8831 · Exp. 6 PM</div>
+                            </div>
+                            <div class="receive-txn-amount" style="color:var(--gold)">250,000</div>
+                        </div>
+                    </div> <button class="receive-cta-btn" onclick="openModal('receiveModal')">Open receive dashboard →</button> </div>
+            </div>
+        </div>
+    </section>
+    <!-- FEATURES -->
+    <section class="features-section" id="features">
+        <div class="section-label">Why Sasula</div>
+        <h2 class="section-title" style="max-width:540px">Not just a payment link. A complete payment context.</h2>
+        <div class="features-grid">
+            <div class="features-list">
+                <div class="feature-item active" id="f1">
+                    <div class="feature-icon-wrap green">🔐</div>
+                    <div>
+                        <div class="feature-title">Structured receipts</div>
+                        <div class="feature-desc">Every payment generates a receipt with amount, reason, timestamp, both parties' names, and a unique reference. Disputes end here.</div>
+                    </div>
+                </div>
+                <div class="feature-item" id="f2">
+                    <div class="feature-icon-wrap amber">📶</div>
+                    <div>
+                        <div class="feature-title">Offline-resilient codes</div>
+                        <div class="feature-desc">Codes work via SMS, WhatsApp, printed receipts, chalkboards, or spoken aloud. Internet is optional for sharing.</div>
+                    </div>
+                </div>
+                <div class="feature-item" id="f3">
+                    <div class="feature-icon-wrap red">🏪</div>
+                    <div>
+                        <div class="feature-title">Merchant mode</div>
+                        <div class="feature-desc">Branded pages, analytics dashboard, staff accounts, and bulk request generation — everything a growing Ugandan business needs.</div>
+                    </div>
+                </div>
+                <div class="feature-item" id="f4">
+                    <div class="feature-icon-wrap blue">👤</div>
+                    <div>
+                        <div class="feature-title">No account needed to pay</div>
+                        <div class="feature-desc">Payers never need to register. Enter code, pick provider, pay in under 60 seconds. Zero friction, maximum adoption.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="features-visual">
+                <div class="receipt-card">
+                    <div class="receipt-header">
+                        <div class="receipt-logo">Sasula</div>
+                        <div class="receipt-badge">Paid</div>
+                    </div>
+                    <div class="receipt-amount-block">
+                        <div class="receipt-amount-label">Amount paid</div>
+                        <div class="receipt-amount"><span>UGX </span>45,000</div>
+                        <div class="receipt-reason">Lunch at Café Javas, Acacia Mall</div>
+                    </div>
+                    <hr class="receipt-divider">
+                    <div class="receipt-row"><span class="receipt-key">Requested by</span><span class="receipt-val">Café Javas</span></div>
+                    <div class="receipt-row"><span class="receipt-key">Paid by</span><span class="receipt-val">07XX-XXX-XXX</span></div>
+                    <div class="receipt-row"><span class="receipt-key">Provider</span><span class="receipt-val">MTN MoMo</span></div>
+                    <div class="receipt-row"><span class="receipt-key">Reference</span><span class="receipt-val">KLA-4829</span></div>
+                    <div class="receipt-row"><span class="receipt-key">Time</span><span class="receipt-val">Today, 12:51 PM</span></div>
+                    <div class="receipt-row"><span class="receipt-key">TXN ID</span><span class="receipt-val" style="font-size:10px">SS-2026-05-27-7X9K</span></div>
+                    <div class="receipt-footer">
+                        <div class="receipt-footer-icon">✓</div>
+                        <div>
+                            <div class="receipt-footer-main">Payment verified</div>
+                            <div class="receipt-footer-text">Both parties notified via SMS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- PRICING -->
+    <section class="pricing-section" id="pricing">
+        <div class="section-label">Pricing</div>
+        <h2 class="section-title" style="max-width:480px">Simple, honest pricing built for Uganda.</h2>
+        <p class="section-sub">No hidden fees. The processing fee shown at checkout is all you pay.</p>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-tag">Personal</div>
+                <div class="pricing-name">Free</div>
+                <div class="pricing-desc">For individuals splitting bills, paying freelancers, or collecting from family.</div>
+                <div class="pricing-price">UGX 0</div>
+                <div class="pricing-period">per month · UGX 300 processing fee per transaction</div>
+                <div class="pricing-features">
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>10 requests per month</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>QR code + payment code</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Digital receipts</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Receive dashboard (basic)</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>WhatsApp share</div>
+                </div> <button class="btn-pricing" onclick="openModal('requestModal')">Get started free</button> </div>
+            <div class="pricing-card featured">
+                <div class="pricing-featured-tag">Most popular</div>
+                <div class="pricing-name">Business</div>
+                <div class="pricing-desc">For shops, restaurants, salons, freelancers, and growing merchants.</div>
+                <div class="pricing-price">UGX 49,000</div>
+                <div class="pricing-period">per month · processing fee included</div>
+                <div class="pricing-features">
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Unlimited requests</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Full receive dashboard</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Instant withdrawals</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Branded payment page</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Up to 5 staff accounts</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Priority support</div>
+                </div> <button class="btn-pricing" onclick="openModal('receiveModal')">Start 14-day trial</button> </div>
+            <div class="pricing-card">
+                <div class="pricing-tag">Institution</div>
+                <div class="pricing-name">School</div>
+                <div class="pricing-desc">For schools, churches, SACCOs, and organisations collecting structured payments.</div>
+                <div class="pricing-price">UGX 150,000</div>
+                <div class="pricing-period">per month · all fees included</div>
+                <div class="pricing-features">
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Bulk fee generation (CSV)</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Parent/member notifications</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Multi-term tracking</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Bank reconciliation</div>
+                    <div class="pricing-feature">
+                        <div class="pricing-check">✓</div>Dedicated account manager</div>
+                </div> <button class="btn-pricing">Contact us</button> </div>
+        </div>
+    </section>
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="section-label">Early adopters</div>
+        <h2 class="section-title" style="max-width:480px">What people are saying.</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <div class="testimonial-text">My customers just scan the code and pay. I no longer check my phone every five minutes to confirm who paid. The receipt does everything.</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar av-1">AT</div>
+                    <div>
+                        <div class="testimonial-name">Amina Tendo</div>
+                        <div class="testimonial-role">Restaurant owner, Kampala</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <div class="testimonial-text">I use it to collect rent. Each tenant gets a code at the start of the month. By the end I can see exactly who paid, when, and how much.</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar av-2">JO</div>
+                    <div>
+                        <div class="testimonial-name">James Okullo</div>
+                        <div class="testimonial-role">Property owner, Ntinda</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <div class="testimonial-text">We piloted it for term one fees. Parents loved paying any time without coming to school. Our accounts office actually worked less.</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar av-3">RN</div>
+                    <div>
+                        <div class="testimonial-name">Rebecca Nakato</div>
+                        <div class="testimonial-role">Head of Finance, private school</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="section-label" style="text-align:center">Get started today</div>
+        <h2 class="section-title">The cash era ends here.</h2>
+        <p class="cta-sub">Join thousands of Ugandans already collecting payments the smarter way. Free to start, no card required.</p>
+        <div class="cta-actions"> <button class="btn-cta" onclick="openModal('requestModal')">Create your first request →</button> <button class="btn-cta-outline" onclick="openModal('receiveModal')">Set up receiving</button> </div>
+    </section>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand-name"> <svg width="26" height="26" viewBox="0 0 40 40" fill="none"> <defs><linearGradient id="lgFoot" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D4891A"/><stop offset="100%" stop-color="#C1440E"/></linearGradient></defs> <rect width="40" height="40" rx="11" fill="url(#lgFoot)"/> <path d="M8 24 Q14 10 20 20 Q26 30 32 16" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/> <path d="M14 17 Q18 12 24 13" stroke="rgba(255,255,255,0.65)" stroke-width="1.8" stroke-linecap="round" fill="none"/> <path d="M28.5 16 L32 16 L30.5 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/> <circle cx="8" cy="28" r="2" fill="rgba(255,255,255,0.5)"/> <circle cx="32" cy="28" r="2" fill="rgba(255,255,255,0.5)"/> <circle cx="20" cy="31" r="2" fill="rgba(255,255,255,0.5)"/> </svg>                    Sasula </div>
+                <div class="footer-brand-desc">The payment context layer for East Africa. Cashless. Instant. Intelligent. Built in Uganda, for Uganda and beyond.<br><br><em style="color:var(--gold);font-size:12px">Sasula — "Payment" in Luganda.</em></div>
+                <div class="footer-social">
+                <button class="footer-social-btn">𝕏</button> <button class="footer-social-btn">in</button> <button class="footer-social-btn">ig</button> <button class="footer-social-btn">wa</button> </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Product</div>
+                <div class="footer-links"> <a href="#">How it works</a><a href="#">Pricing</a> <a href="#">For merchants</a><a href="#">For schools</a><a href="#">Changelog</a> </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Developers</div>
+                <div class="footer-links"> <a href="#">Documentation</a><a href="#">API reference</a> <a href="#">SDKs</a><a href="#">Sandbox</a><a href="#">Status</a> </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Company</div>
+                <div class="footer-links"> <a href="#">About</a><a href="#">Blog</a> <a href="#">Contact</a><a href="#">Careers</a><a href="#">Press kit</a> </div>
+            </div>
+        </div>
+        <div class="footer-bottom"> <span>© 2026 Sasula Uganda Ltd. All rights reserved.</span>
+            <div class="footer-bottom-right"> <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a> </div>
+        </div>
+    </footer>
+    <script>
+        // ══════════════════════════════════════ // MODAL SYSTEM // ══════════════════════════════════════ function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; } function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; } document.querySelectorAll('.modal-overlay').forEach(m => { m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); }); }); document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id)); }); // ══════════════════════════════════════ // TOAST // ══════════════════════════════════════ function showToast(text, sub) { const t = document.getElementById('toast'); document.getElementById('toast-text').textContent = text; document.getElementById('toast-sub').textContent = sub || ''; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500); } // ══════════════════════════════════════ // MOBILE NAV // ══════════════════════════════════════ function toggleMobileMenu() { const ham = document.getElementById('nav-ham'); const menu = document.getElementById('nav-mobile'); ham.classList.toggle('open'); menu.classList.toggle('open'); } // ══════════════════════════════════════ // REQUEST FLOW // ══════════════════════════════════════ let flowData = {}; function updateFlowDots(page) { for (let i = 1; i <= 4; i++) { const d = document.getElementById('rd' + i); if (!d) continue; if (i < page) { d.classList.remove('active'); d.classList.add('done'); } else if (i === page) { d.classList.add('active'); d.classList.remove('done'); } else { d.classList.remove('active','done'); } } } function showFlowPage(n) { document.querySelectorAll('#requestModal .flow-page').forEach(p => p.classList.remove('active')); const el = document.getElementById('fp' + n); if (el) el.classList.add('active'); updateFlowDots(n); } function flowNext(from) { if (from === 1) { const amount = document.getElementById('inp-amount').value; const reason = document.getElementById('inp-reason').value; const name = document.getElementById('inp-name').value; if (!amount || amount < 500) { showToast('Enter a valid amount', 'Minimum is UGX 500'); return; } if (!reason.trim()) { showToast('Please add a reason', 'e.g. School fees, Rent, Lunch'); return; } flowData.amount = parseInt(amount).toLocaleString(); flowData.reason = reason; flowData.name = name || 'Anonymous'; document.getElementById('flow-title').textContent = 'Customise your request'; document.getElementById('flow-subtitle').textContent = 'Optional settings for this payment'; showFlowPage(2); } else if (from === 2) { const expiry = document.getElementById('inp-expiry').value; flowData.expiry = expiry === '0' ? 'No expiry' : expiry + ' hours'; const prefixes = ['KLA','GUL','MBR','JIN','ENT','UGA']; const pre = prefixes[Math.floor(Math.random() * prefixes.length)]; const num = Math.floor(1000 + Math.random() * 9000); flowData.code = pre + '·' + num; document.getElementById('gen-code').textContent = flowData.code; document.getElementById('gen-expiry-label').textContent = 'Expires in ' + flowData.expiry; document.getElementById('final-code').textContent = flowData.code; document.getElementById('final-amount-label').textContent = 'UGX ' + flowData.amount + ' · Awaiting payment'; document.getElementById('gen-summary').innerHTML = ` <div class="payment-summary-row"><span class="ps-key">Amount</span><span class="ps-val">UGX ${flowData.amount}</span></div> <div class="payment-summary-row"><span class="ps-key">For</span><span class="ps-val">${flowData.reason}</span></div> <div class="payment-summary-row"><span class="ps-key">From</span><span class="ps-val">${flowData.name}</span></div> <div class="payment-summary-row"><span class="ps-key">Expires</span><span class="ps-val">${flowData.expiry}</span></div>`; document.getElementById('flow-title').textContent = 'Share your code'; document.getElementById('flow-subtitle').textContent = 'Your request is ready'; showFlowPage(3); } else if (from === 3) { document.getElementById('flow-title').textContent = "You're all set!"; document.getElementById('flow-subtitle').textContent = 'Your payment request is live'; showFlowPage(4); } } function flowBack(from) { showFlowPage(from - 1); if (from === 2) { document.getElementById('flow-title').textContent = 'Create a request'; document.getElementById('flow-subtitle').textContent = "Tell us what you're collecting for"; } } function toggleProvider(btn) { btn.classList.toggle('selected'); } function shareCode(method) { const code = flowData.code || 'SS-0000'; const msg = `Pay me UGX ${flowData.amount || ''} for "${flowData.reason || ''}" using code *${code}* on Sasula. Go to sasula.ug`; if (method === 'copy') { navigator.clipboard.writeText(msg).then(() => showToast('Copied!', code)).catch(() => showToast('Code: ' + code, '')); } else if (method === 'whatsapp') { window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); } else { showToast('Ready to share', code); } } // ══════════════════════════════════════ // RECEIVE MODAL TABS // ══════════════════════════════════════ function switchReceiveTab(tab) { ['wallet','methods','history'].forEach(t => { const btn = document.getElementById('rtab-' + t); const panel = document.getElementById('rpanel-' + t); const active = t === tab; if (btn) { btn.style.background = active ? 'var(--ink-3)' : 'transparent'; btn.style.color = active ? 'white' : 'var(--text-dim)'; } if (panel) { panel.style.display = active ? 'block' : 'none'; } }); } function selectWithdraw(el) { document.querySelectorAll('.withdraw-option').forEach(o => { o.classList.remove('selected'); const chk = o.querySelector('.withdraw-option-check'); if (chk) chk.textContent = ''; }); el.classList.add('selected'); const chk = el.querySelector('.withdraw-option-check'); if (chk) chk.textContent = '✓'; } function submitWithdraw() { const amt = document.getElementById('withdraw-amount').value; const phone = document.getElementById('withdraw-phone').value; if (!amt || amt < 1000) { showToast('Enter a valid amount', 'Minimum UGX 1,000'); return; } if (!phone.trim()) { showToast('Enter phone number', 'e.g. 0771234567'); return; } showToast('Withdrawal initiated!', 'UGX ' + parseInt(amt).toLocaleString() + ' → ' + phone); document.getElementById('withdraw-panel').style.display = 'none'; document.getElementById('wallet-main').style.display = 'block'; closeModal('receiveModal'); } // Receive methods let currentReceiveMethod = 'code'; function selectReceiveMethod(method) { ['code','link','qr','bank'].forEach(m => { const btn = document.getElementById('rm-' + m); const content = document.getElementById('rm-content-' + m); const active = m === method; if (btn) btn.classList.toggle('selected', active); if (content) content.style.display = active ? 'block' : 'none'; }); currentReceiveMethod = method; } // ══════════════════════════════════════ // HOW IT WORKS DEMO // ══════════════════════════════════════ function switchTab(tab) { document.querySelectorAll('.how-demo-tab').forEach((t, i) => { t.classList.toggle('active', (i === 0 && tab === 'merchant') || (i === 1 && tab === 'payer')); }); document.getElementById('tab-merchant').classList.toggle('active', tab === 'merchant'); document.getElementById('tab-payer').classList.toggle('active', tab === 'payer'); } function merchantStep(n) { ['ms1','ms2','ms3'].forEach((id, i) => { const el = document.getElementById(id); if(el) el.classList.toggle('active', i+1===n); }); updateDemoInds('merchant-inds', n); } function payerStep(n) { ['ps1','ps2','ps3'].forEach((id, i) => { const el = document.getElementById(id); if(el) el.classList.toggle('active', i+1===n); }); updateDemoInds('payer-inds', n); } function updateDemoInds(containerId, active) { const c = document.getElementById(containerId); if (!c) return; c.querySelectorAll('.demo-step-ind').forEach((d, i) => d.classList.toggle('active', i+1===active)); } // ══════════════════════════════════════ // COUNTERS // ══════════════════════════════════════ function animateCounter(el, target, duration = 2000) { let start = 0; const step = target / (duration / 16); const timer = setInterval(() => { start += step; if (start >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); return; } el.textContent = Math.floor(start).toLocaleString(); }, 16); } const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target, parseInt(e.target.dataset.target)); obs.unobserve(e.target); }}); }, { threshold: 0.5 }); document.querySelectorAll('.counter-number[data-target]').forEach(c => obs.observe(c)); let txnCount = 4218; const txnEl = document.getElementById('txn-count'); if (txnEl) { txnEl.textContent = txnCount.toLocaleString(); setInterval(() => { txnCount += Math.floor(Math.random()*3)+1; txnEl.textContent = txnCount.toLocaleString(); }, 3000); } // ══════════════════════════════════════ // FEATURE HOVER // ══════════════════════════════════════ document.querySelectorAll('.feature-item, .receive-feature').forEach(item => { item.addEventListener('mouseenter', () => { item.closest('.features-list, .receive-features').querySelectorAll('.feature-item, .receive-feature').forEach(i => i.classList.remove('active')); item.classList.add('active'); }); }); // ══════════════════════════════════════ // NAV SCROLL // ══════════════════════════════════════ window.addEventListener('scroll', () => { const nav = document.getElementById('main-nav'); if (window.scrollY > 20) { nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.4)'; nav.style.background = 'rgba(11,13,15,0.97)'; } else { nav.style.boxShadow = 'none'; nav.style.background = 'rgba(11,13,15,0.9)'; } });
+    </script>
+</body>
+
+</html>
