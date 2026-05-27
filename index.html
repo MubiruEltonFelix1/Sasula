@@ -20,8 +20,7 @@
     <meta name="twitter:title" content="Sasula — Cashless. Instant. Intelligent.">
     <meta name="twitter:description" content="Request payments, share a secure code or link, and receive money with full payment context. Built for mobile-first payments in Uganda.">
     <meta name="twitter:image" content="https://sasula.ug/share-preview.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
          :root {
             --gold: #D4891A;
@@ -1692,7 +1691,7 @@
             flex-shrink: 0;
             line-height: 0;
         }
-
+        
         .float-badge-icon svg,
         .receive-feature-icon svg,
         .step-icon svg,
@@ -2180,23 +2179,23 @@
             transform: translateY(-2px);
         }
         /* ══════════════════════════════════════ JOURNEY + DOCS ══════════════════════════════════════ */
-
+        
         .journey-section,
         .docs-section {
             padding: 92px 5vw;
         }
-
+        
         .journey-section {
             background: var(--ink);
         }
-
+        
         .journey-grid,
         .docs-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
         }
-
+        
         .journey-card,
         .docs-card {
             background: rgba(255, 255, 255, 0.03);
@@ -2205,7 +2204,7 @@
             padding: 28px;
             box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
         }
-
+        
         .journey-card h3,
         .docs-card h3 {
             font-family: 'Cormorant Garamond', serif;
@@ -2214,7 +2213,7 @@
             margin-bottom: 10px;
             color: white;
         }
-
+        
         .journey-card p,
         .docs-card p {
             color: var(--text-dim);
@@ -2222,14 +2221,14 @@
             line-height: 1.7;
             margin-bottom: 18px;
         }
-
+        
         .journey-steps,
         .docs-list {
             display: grid;
             gap: 10px;
             margin-bottom: 18px;
         }
-
+        
         .journey-step,
         .docs-link {
             display: flex;
@@ -2242,7 +2241,7 @@
             color: var(--text-bright);
             text-decoration: none;
         }
-
+        
         .journey-step-num {
             width: 30px;
             height: 30px;
@@ -2256,7 +2255,7 @@
             font-weight: 700;
             flex-shrink: 0;
         }
-
+        
         .journey-step strong,
         .docs-link strong {
             display: block;
@@ -2264,7 +2263,7 @@
             margin-bottom: 2px;
             color: white;
         }
-
+        
         .journey-step span,
         .docs-link span {
             display: block;
@@ -2272,24 +2271,25 @@
             color: var(--text-dim);
             line-height: 1.5;
         }
-
+        
         .journey-actions,
         .docs-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
         }
-
+        
         .docs-card.featured {
             background: linear-gradient(135deg, rgba(212, 137, 26, 0.12), rgba(28, 31, 34, 0.96));
             border-color: var(--border-gold);
         }
-
+        
         .docs-note {
             font-size: 12px;
             color: var(--text-dim);
             margin-top: 14px;
         }
+        
         .icon-inline {
             display: inline-flex;
             align-items: center;
@@ -2298,7 +2298,7 @@
             height: 18px;
             flex-shrink: 0;
         }
-
+        
         .icon-inline svg {
             width: 100%;
             height: 100%;
@@ -2308,7 +2308,7 @@
             stroke-linecap: round;
             stroke-linejoin: round;
         }
-
+        
         .icon-chip {
             width: 34px;
             height: 34px;
@@ -2320,7 +2320,7 @@
             background: rgba(255, 255, 255, 0.04);
             color: var(--text-bright);
         }
-
+        
         .icon-chip svg {
             width: 18px;
             height: 18px;
@@ -3288,7 +3288,7 @@
                     <div class="form-group"> <label class="form-label">Expiry</label> <select class="form-input" id="inp-expiry" style="cursor:pointer"> <option value="24">24 hours</option> <option value="48">48 hours</option> <option value="72">72 hours</option> <option value="168">1 week</option> <option value="0">No expiry</option> </select>                        </div>
                     <div class="form-group"> <label class="form-label">Allow partial payment?</label> <select class="form-input" id="inp-partial" style="cursor:pointer"> <option value="no">No — full amount only</option> <option value="yes">Yes — any amount</option> </select>                        </div>
                     <div class="form-group"> <label class="form-label">Accepted providers</label>
-                        <div class="provider-grid"> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="mtn"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3"></rect><path d="M9 7h6"></path><path d="M10 18h4"></path></svg></span>MTN MoMo</button> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="airtel"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M8 8c2-2 6-2 8 0"></path><path d="M6 11c3-4 9-4 12 0"></path><path d="M9 14c1.5-2 4.5-2 6 0"></path></svg></span>Airtel Money</button>                            <button class="provider-btn" onclick="toggleProvider(this)" data-v="stanbic"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21h16"></path><path d="M6 21V9h12v12"></path><path d="M6 9l6-5 6 5"></path><path d="M10 13v4"></path><path d="M14 13v4"></path></svg></span>Stanbic</button> </div>
+                        <div class="provider-grid"> <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="mtn"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3"></rect><path d="M9 7h6"></path><path d="M10 18h4"></path></svg></span>MTN MoMo</button>                            <button class="provider-btn selected" onclick="toggleProvider(this)" data-v="airtel"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M8 8c2-2 6-2 8 0"></path><path d="M6 11c3-4 9-4 12 0"></path><path d="M9 14c1.5-2 4.5-2 6 0"></path></svg></span>Airtel Money</button>                            <button class="provider-btn" onclick="toggleProvider(this)" data-v="stanbic"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21h16"></path><path d="M6 21V9h12v12"></path><path d="M6 9l6-5 6 5"></path><path d="M10 13v4"></path><path d="M14 13v4"></path></svg></span>Stanbic</button>                            </div>
                     </div> <button class="btn-flow-next" onclick="flowNext(2)">Generate my code →</button> <button class="btn-flow-back" onclick="flowBack(2)">← Back</button> </div>
                 <!-- PAGE 3 -->
                 <div class="flow-page" id="fp3">
@@ -3296,7 +3296,7 @@
                         <div class="code-result-label">Your payment code</div>
                         <div class="code-result-value" id="gen-code">KLA·0000</div>
                         <div class="code-result-sub" id="gen-expiry-label">Expires in 24 hours</div>
-                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>SMS</button> <button class="code-share-btn" onclick="shareCode('copy')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button>                            </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button>                            <button class="code-share-btn" onclick="shareCode('sms')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>SMS</button>                            <button class="code-share-btn" onclick="shareCode('copy')"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button>                            </div>
                     </div>
                     <div class="payment-summary" id="gen-summary"></div> <button class="btn-flow-next" onclick="flowNext(3)">✓ Done — view receipt</button> </div>
                 <!-- PAGE 4 -->
@@ -3424,8 +3424,7 @@
                     <div class="flow-title" style="font-size:24px;margin-bottom:4px">How do you want to be paid?</div>
                     <div class="flow-subtitle" style="margin-bottom:20px">Pick a method and share it with your payer</div>
                     <div class="form-group"> <label class="form-label">Choose method</label>
-                        <div class="receive-method-grid"> <button class="receive-method-btn selected" id="rm-code" onclick="selectReceiveMethod('code')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 8 5 12l4 4"></path><path d="M15 8l4 4-4 4"></path><path d="M14 6 10 18"></path></svg></span> Payment code <small>Human-readable · Works offline</small> </button> <button class="receive-method-btn"
-                            id="rm-link" onclick="selectReceiveMethod('link')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a4 4 0 0 1 0-6l2-2a4 4 0 0 1 6 6l-1 1"></path><path d="M14 11a4 4 0 0 1 0 6l-2 2a4 4 0 0 1-6-6l1-1"></path></svg></span> Payment link <small>Share a URL · Mobile-friendly</small> </button> <button class="receive-method-btn" id="rm-qr" onclick="selectReceiveMethod('qr')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3"></path><path d="M18 14h2v2"></path><path d="M14 18h2"></path></svg></span> QR code <small>Scan to pay · Print-ready</small> </button>                            <button class="receive-method-btn" id="rm-bank" onclick="selectReceiveMethod('bank')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21h16"></path><path d="M6 21V9h12v12"></path><path d="M6 9l6-5 6 5"></path><path d="M10 13v4"></path><path d="M14 13v4"></path></svg></span> Bank details <small>Account number · SWIFT</small> </button> </div>
+                        <div class="receive-method-grid"> <button class="receive-method-btn selected" id="rm-code" onclick="selectReceiveMethod('code')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 8 5 12l4 4"></path><path d="M15 8l4 4-4 4"></path><path d="M14 6 10 18"></path></svg></span> Payment code <small>Human-readable · Works offline</small> </button>                            <button class="receive-method-btn" id="rm-link" onclick="selectReceiveMethod('link')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a4 4 0 0 1 0-6l2-2a4 4 0 0 1 6 6l-1 1"></path><path d="M14 11a4 4 0 0 1 0 6l-2 2a4 4 0 0 1-6-6l1-1"></path></svg></span> Payment link <small>Share a URL · Mobile-friendly</small> </button>                            <button class="receive-method-btn" id="rm-qr" onclick="selectReceiveMethod('qr')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3"></path><path d="M18 14h2v2"></path><path d="M14 18h2"></path></svg></span> QR code <small>Scan to pay · Print-ready</small> </button>                            <button class="receive-method-btn" id="rm-bank" onclick="selectReceiveMethod('bank')"> <span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21h16"></path><path d="M6 21V9h12v12"></path><path d="M6 9l6-5 6 5"></path><path d="M10 13v4"></path><path d="M14 13v4"></path></svg></span> Bank details <small>Account number · SWIFT</small> </button>                            </div>
                     </div>
                     <!-- Code method content -->
                     <div id="rm-content-code">
@@ -3434,13 +3433,13 @@
                             <div class="code-result-value" style="font-size:36px">KLA·7741</div>
                             <div class="code-result-sub">Share this code — payer enters it at sasula.ug</div>
                         </div>
-                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>SMS</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button> </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button>                            <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>SMS</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button>                            </div>
                     </div>
                     <!-- Link method content -->
                     <div id="rm-content-link" style="display:none">
                         <div class="link-display"> <span class="link-text">sasula.ug/pay/kla-7741</span> <button class="link-copy-btn" onclick="showToast('Link copied!','sasula.ug/pay/kla-7741')">Copy</button> </div>
                         <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px">Payer opens link, sees your request, and pays with their preferred Mobile Money provider — no app needed.</div>
-                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button> <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>Email</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button> </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>WhatsApp</button>                            <button class="code-share-btn" onclick="shareCode('sms')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4v-4H5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg></span>Email</button>                            <button class="code-share-btn" onclick="shareCode('copy')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span>Copy</button>                            </div>
                     </div>
                     <!-- QR method content -->
                     <div id="rm-content-qr" style="display:none">
@@ -3533,14 +3532,14 @@
                             </div>
                         </div>
                         <div style="text-align:center;font-size:12px;color:var(--text-dim);margin-bottom:12px">Print this QR and put it at your till, table, or entrance</div>
-                        <div class="code-share-row"> <button class="code-share-btn" onclick="showToast('Downloading QR…','Saving as PNG')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v10"></path><path d="M8 9l4 4 4-4"></path><path d="M5 17h14"></path></svg></span>Download PNG</button> <button class="code-share-btn" onclick="showToast('Opening print…','')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 8V4h10v4"></path><rect x="5" y="8" width="14" height="8" rx="2"></rect><path d="M8 16v4h8v-4"></path></svg></span>Print</button>                            <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>Share</button> </div>
+                        <div class="code-share-row"> <button class="code-share-btn" onclick="showToast('Downloading QR…','Saving as PNG')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v10"></path><path d="M8 9l4 4 4-4"></path><path d="M5 17h14"></path></svg></span>Download PNG</button>                            <button class="code-share-btn" onclick="showToast('Opening print…','')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 8V4h10v4"></path><rect x="5" y="8" width="14" height="8" rx="2"></rect><path d="M8 16v4h8v-4"></path></svg></span>Print</button>                            <button class="code-share-btn" onclick="shareCode('whatsapp')" style="border-color:var(--border-sky)"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1.1-3.2A8 8 0 1 1 20 12z"></path><path d="M8.5 8.5c.4 2.6 2 4.7 4.6 5.5"></path></svg></span>Share</button>                            </div>
                     </div>
                     <!-- Bank method content -->
                     <div id="rm-content-bank" style="display:none">
                         <div class="bank-details-card">
                             <div class="bank-detail-row"> <span class="bank-detail-key">Account name</span> <span class="bank-detail-val">Sasula Uganda Ltd <button class="copy-mini" onclick="showToast('Copied!','Account name')">Copy</button></span> </div>
                             <div class="bank-detail-row">
-                            <span class="bank-detail-key">Bank</span> <span class="bank-detail-val">Stanbic Bank Uganda</span> </div>
+                                <span class="bank-detail-key">Bank</span> <span class="bank-detail-val">Stanbic Bank Uganda</span> </div>
                             <div class="bank-detail-row"> <span class="bank-detail-key">Account no.</span> <span class="bank-detail-val">9030014782 <button class="copy-mini" onclick="showToast('Copied!','9030014782')">Copy</button></span> </div>
                             <div class="bank-detail-row"> <span class="bank-detail-key">Branch</span> <span class="bank-detail-val">Kampala Main</span> </div>
                             <div class="bank-detail-row"> <span class="bank-detail-key">SWIFT / BIC</span> <span class="bank-detail-val">SBICUGKX <button class="copy-mini" onclick="showToast('Copied!','SBICUGKX')">Copy</button></span> </div>
@@ -3587,7 +3586,7 @@
                             </div>
                         </div>
                         <div class="pending-item">
-                                <div class="pending-icon waiting" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2"></path><path d="M12 3a9 9 0 1 0 9 9"></path><path d="M21 3v6h-6"></path></svg></div>
+                            <div class="pending-icon waiting" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2"></path><path d="M12 3a9 9 0 1 0 9 9"></path><path d="M21 3v6h-6"></path></svg></div>
                             <div class="pending-info">
                                 <div class="pending-reason">School term fees – Grade 4</div>
                                 <div class="pending-meta">Issued today · KLA-8831 · Expires 6 PM</div>
@@ -3782,7 +3781,7 @@
         </ul>
         <div class="nav-actions"> <a href="#" class="btn-ghost">Sign in</a> <button class="btn-primary" onclick="openModal('receiveModal')"> Receive payments <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>            </div> <button class="nav-hamburger" id="nav-ham" onclick="toggleMobileMenu()"> <span></span><span></span><span></span> </button> </nav>
     <!-- Mobile Menu -->
-    <div class="nav-mobile-menu" id="nav-mobile"> <a class="nav-mobile-link" href="#journey" onclick="toggleMobileMenu()">User journey</a> <a class="nav-mobile-link" href="#how" onclick="toggleMobileMenu()">How it works</a> <a class="nav-mobile-link" href="#receive" onclick="toggleMobileMenu()">Receive payments</a> <a class="nav-mobile-link" href="docs.html" onclick="toggleMobileMenu()">Documentation</a>        <a class="nav-mobile-link" href="#pricing" onclick="toggleMobileMenu()">Pricing</a> <a class="nav-mobile-link" href="#testimonials" onclick="toggleMobileMenu()">Stories</a>
+    <div class="nav-mobile-menu" id="nav-mobile"> <a class="nav-mobile-link" href="#journey" onclick="toggleMobileMenu()">User journey</a> <a class="nav-mobile-link" href="#how" onclick="toggleMobileMenu()">How it works</a> <a class="nav-mobile-link" href="#receive" onclick="toggleMobileMenu()">Receive payments</a>        <a class="nav-mobile-link" href="docs.html" onclick="toggleMobileMenu()">Documentation</a> <a class="nav-mobile-link" href="#pricing" onclick="toggleMobileMenu()">Pricing</a> <a class="nav-mobile-link" href="#testimonials" onclick="toggleMobileMenu()">Stories</a>
         <div class="nav-mobile-actions"> <a href="#" class="btn-ghost">Sign in</a> <button class="btn-primary" onclick="toggleMobileMenu();openModal('receiveModal')">Receive →</button> </div>
     </div>
     <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
@@ -3793,7 +3792,7 @@
                 <div class="hero-tag-dot"></div> Built in Uganda · For East Africa </div>
             <h1 class="hero-headline"> Money moves<br> <em>with purpose</em><br> in Uganda </h1>
             <p class="hero-sub"> <strong>Sasula</strong> is the payment request layer that every Mobile Money network was missing. Create a code, share it anywhere, get paid — with full context attached. </p>
-                <div class="hero-cta-row"> <button class="btn-large" onclick="openModal('requestModal')"> Start requesting <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-large sky-btn" onclick="openModal('receiveModal')"> Receive payments <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-outline-large" onclick="openModal('howModal')">How it works</button> </div>
+            <div class="hero-cta-row"> <button class="btn-large" onclick="openModal('requestModal')"> Start requesting <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-large sky-btn" onclick="openModal('receiveModal')"> Receive payments <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </button>                <button class="btn-outline-large" onclick="openModal('howModal')">How it works</button> </div>
             <div class="hero-stats">
                 <div class="hero-stat"> <span class="hero-stat-num" id="txn-count">4,218</span> <span class="hero-stat-label">Live transactions</span> </div>
                 <div class="hero-stat-divider"></div>
@@ -3803,15 +3802,15 @@
             </div>
         </div>
         <div class="hero-right">
-                <div class="float-badge badge-1">
-                    <div class="float-badge-icon" style="background:rgba(42,128,85,0.15)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg></div>
+            <div class="float-badge badge-1">
+                <div class="float-badge-icon" style="background:rgba(42,128,85,0.15)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg></div>
                 <div>
                     <div class="float-badge-text">Payment confirmed</div>
                     <div class="float-badge-sub">UGX 45,000 · KLA-4829</div>
                 </div>
             </div>
-                <div class="float-badge badge-2">
-                    <div class="float-badge-icon" style="background:rgba(212,137,26,0.12)"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M9 7h6M10 18h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></div>
+            <div class="float-badge badge-2">
+                <div class="float-badge-icon" style="background:rgba(212,137,26,0.12)"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M9 7h6M10 18h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></div>
                 <div>
                     <div class="float-badge-text">Via MTN MoMo</div>
                     <div class="float-badge-sub">Just now · Ref: SS-7X9K</div>
@@ -3914,9 +3913,18 @@
                 <h3>Start requesting</h3>
                 <p>Create a request, customise the details, and share the code or link with the person paying you.</p>
                 <div class="journey-steps">
-                    <div class="journey-step"><div class="journey-step-num">1</div><div><strong>Enter amount and reason</strong><span>Use the request modal to define what you are collecting for.</span></div></div>
-                    <div class="journey-step"><div class="journey-step-num">2</div><div><strong>Generate a payment code</strong><span>Pick an expiry and send the code through WhatsApp, SMS, or copy it.</span></div></div>
-                    <div class="journey-step"><div class="journey-step-num">3</div><div><strong>Watch the receipt arrive</strong><span>The request stays live until it is paid, then the receipt updates automatically.</span></div></div>
+                    <div class="journey-step">
+                        <div class="journey-step-num">1</div>
+                        <div><strong>Enter amount and reason</strong><span>Use the request modal to define what you are collecting for.</span></div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="journey-step-num">2</div>
+                        <div><strong>Generate a payment code</strong><span>Pick an expiry and send the code through WhatsApp, SMS, or copy it.</span></div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="journey-step-num">3</div>
+                        <div><strong>Watch the receipt arrive</strong><span>The request stays live until it is paid, then the receipt updates automatically.</span></div>
+                    </div>
                 </div>
                 <div class="journey-actions"><button class="btn-large" onclick="openModal('requestModal')">Start requesting</button></div>
             </article>
@@ -3924,9 +3932,18 @@
                 <h3>Receive payments</h3>
                 <p>See incoming payments, switch between wallet, methods, and history, and move your balance when you are ready.</p>
                 <div class="journey-steps">
-                    <div class="journey-step"><div class="journey-step-num">1</div><div><strong>Open the receive dashboard</strong><span>Track balance, pending items, and recent payments in one place.</span></div></div>
-                    <div class="journey-step"><div class="journey-step-num">2</div><div><strong>Choose a payout path</strong><span>Move funds to MTN, Airtel, or bank details in the simple simulation.</span></div></div>
-                    <div class="journey-step"><div class="journey-step-num">3</div><div><strong>Keep a clean history</strong><span>Every simulated payment is recorded with a reference and timestamp.</span></div></div>
+                    <div class="journey-step">
+                        <div class="journey-step-num">1</div>
+                        <div><strong>Open the receive dashboard</strong><span>Track balance, pending items, and recent payments in one place.</span></div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="journey-step-num">2</div>
+                        <div><strong>Choose a payout path</strong><span>Move funds to MTN, Airtel, or bank details in the simple simulation.</span></div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="journey-step-num">3</div>
+                        <div><strong>Keep a clean history</strong><span>Every simulated payment is recorded with a reference and timestamp.</span></div>
+                    </div>
                 </div>
                 <div class="journey-actions"><button class="btn-large sky-btn" onclick="openModal('receiveModal')">Receive payments</button></div>
             </article>
@@ -3939,7 +3956,7 @@
         <h2 class="section-title">Three steps.<br>One seamless flow.</h2>
         <p class="section-sub">Sasula separates the request from the payment — so anyone can pay you, using any Mobile Money provider, with full context attached.</p>
         <div class="steps-grid">
-                <div class="step-card" onclick="openModal('requestModal')">
+            <div class="step-card" onclick="openModal('requestModal')">
                 <div class="step-number">STEP 01</div>
                 <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M7 17h10"></path><path d="M8 7h8"></path><path d="M8 12h8"></path><path d="M16 5l3 3-3 3"></path></svg></div>
                 <div class="step-title">Create your request</div>
@@ -4232,8 +4249,14 @@
                 <h3>What stays here</h3>
                 <p>The homepage still shows the product simulations, but the full written documentation is no longer duplicated here.</p>
                 <div class="docs-list">
-                    <a class="docs-link" href="#journey"><div class="journey-step-num">1</div><div><strong>User journey</strong><span>Request and receive flow summaries on the homepage.</span></div></a>
-                    <a class="docs-link" href="#how"><div class="journey-step-num">2</div><div><strong>Interactive demo</strong><span>Merchant and payer simulations on the homepage.</span></div></a>
+                    <a class="docs-link" href="#journey">
+                        <div class="journey-step-num">1</div>
+                        <div><strong>User journey</strong><span>Request and receive flow summaries on the homepage.</span></div>
+                    </a>
+                    <a class="docs-link" href="#how">
+                        <div class="journey-step-num">2</div>
+                        <div><strong>Interactive demo</strong><span>Merchant and payer simulations on the homepage.</span></div>
+                    </a>
                 </div>
                 <div class="docs-note">For full reading, use the standalone docs page instead of this homepage teaser.</div>
             </article>
@@ -4246,7 +4269,7 @@
                 <div class="footer-brand-name"> <svg width="26" height="26" viewBox="0 0 40 40" fill="none"> <defs><linearGradient id="lgFoot" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D4891A"/><stop offset="100%" stop-color="#C1440E"/></linearGradient></defs> <rect width="40" height="40" rx="11" fill="url(#lgFoot)"/> <path d="M8 24 Q14 10 20 20 Q26 30 32 16" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/> <path d="M14 17 Q18 12 24 13" stroke="rgba(255,255,255,0.65)" stroke-width="1.8" stroke-linecap="round" fill="none"/> <path d="M28.5 16 L32 16 L30.5 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/> <circle cx="8" cy="28" r="2" fill="rgba(255,255,255,0.5)"/> <circle cx="32" cy="28" r="2" fill="rgba(255,255,255,0.5)"/> <circle cx="20" cy="31" r="2" fill="rgba(255,255,255,0.5)"/> </svg>                    Sasula </div>
                 <div class="footer-brand-desc">The payment context layer for East Africa. Cashless. Instant. Intelligent. Built in Uganda, for Uganda and beyond.<br><br><em style="color:var(--gold);font-size:12px">Sasula — "Payment" in Luganda.</em></div>
                 <div class="footer-social">
-                <button class="footer-social-btn">𝕏</button> <button class="footer-social-btn">in</button> <button class="footer-social-btn">ig</button> <button class="footer-social-btn">wa</button> </div>
+                    <button class="footer-social-btn">𝕏</button> <button class="footer-social-btn">in</button> <button class="footer-social-btn">ig</button> <button class="footer-social-btn">wa</button> </div>
             </div>
             <div>
                 <div class="footer-col-title">Product</div>
@@ -4517,7 +4540,9 @@
                         obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.45 });
+            }, {
+                threshold: 0.45
+            });
 
             document.querySelectorAll('.counter-number[data-target]').forEach(counter => obs.observe(counter));
         }
